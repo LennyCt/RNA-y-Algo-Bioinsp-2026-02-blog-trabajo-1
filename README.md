@@ -3,7 +3,7 @@
 Redes neuronales y algoritmos bioinspirados, Universidad Nacional de Colombia, semestre 2026-02.
 
 ```
-optimizacion-heuristica/
+optimizacion/
 ├── requirements.txt        entorno único, versiones fijas
 ├── README.md               este archivo
 ├── Optimizacion_heuristica/        descenso por gradiente vs. AG, PSO y evolución diferencial
