@@ -1,0 +1,11 @@
+{
+  "source": "OSRM Table API",
+  "endpoint": "https://router.project-osrm.org",
+  "retrieved_on": "2026-10-13",
+  "routing_profile": "driving",
+  "units": {
+    "distances.csv": "km",
+    "travel_times.csv": "h"
+  },
+  "note": "OSRM devuelve la ruta más rápida según el perfil; no necesariamente la de menor distancia ni la de menor costo monetario."
+}

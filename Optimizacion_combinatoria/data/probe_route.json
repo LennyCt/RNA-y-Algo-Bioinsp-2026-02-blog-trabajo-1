@@ -1,0 +1,181 @@
+{
+  "url": "https://router.project-osrm.org/route/v1/driving/-3.703800,40.416800;2.173400,41.385100",
+  "code": "Ok",
+  "server_version": null,
+  "distance_km": 617.8,
+  "n_steps": 37,
+  "n_intersections": 385,
+  "intersection_keys": [
+    "bearings",
+    "entry",
+    "in",
+    "lanes",
+    "location",
+    "out"
+  ],
+  "step_keys": [
+    "destinations",
+    "distance",
+    "driving_side",
+    "duration",
+    "geometry",
+    "intersections",
+    "maneuver",
+    "mode",
+    "name",
+    "ref",
+    "rotary_name",
+    "weight"
+  ],
+  "classes_seen": [],
+  "raw_first_steps": [
+    {
+      "intersections": [
+        {
+          "out": 0,
+          "entry": [
+            true
+          ],
+          "bearings": [
+            61
+          ],
+          "location": [
+            -3.70365,
+            40.4176
+          ]
+        }
+      ],
+      "driving_side": "right",
+      "geometry": "_auuFxjrUEMEIIIaCmAIC",
+      "maneuver": {
+        "bearing_after": 61,
+        "bearing_before": 0,
+        "location": [
+          -3.70365,
+          40.4176
+        ],
+        "modifier": "right",
+        "type": "depart"
+      },
+      "name": "Calle de Tetuán",
+      "mode": "driving",
+      "weight": 42.5,
+      "duration": 42.5,
+      "distance": 104.7
+    },
+    {
+      "intersections": [
+        {
+          "out": 2,
+          "in": 1,
+          "entry": [
+            false,
+            false,
+            true
+          ],
+          "bearings": [
+            105,
+            210,
+            300
+          ],
+          "location": [
+            -3.703066,
+            40.41841
+          ]
+        },
+        {
+          "out": 0,
+          "in": 1,
+          "entry": [
+            true,
+            false,
+            true
+          ],
+          "bearings": [
+            30,
+            150,
+            225
+          ],
+          "location": [
+            -3.703796,
+            40.418741
+          ]
+        },
+        {
+          "out": 0,
+          "in": 1,
+          "entry": [
+            true,
+            false,
+            false
+          ],
+          "bearings": [
+            45,
+            210,
+            300
+          ],
+          "location": [
+            -3.703739,
+            40.418835
+          ]
+        }
+      ],
+      "driving_side": "right",
+      "geometry": "afuuFdgrU]hAQl@CNEDGBMEEEKQi@i@",
+      "maneuver": {
+        "bearing_after": 296,
+        "bearing_before": 23,
+        "location": [
+          -3.703066,
+          40.41841
+        ],
+        "modifier": "left",
+        "type": "turn"
+      },
+      "name": "Plaza del Carmen",
+      "mode": "driving",
+      "weight": 25.8,
+      "duration": 25.8,
+      "distance": 125.8
+    },
+    {
+      "intersections": [
+        {
+          "out": 1,
+          "in": 2,
+          "entry": [
+            true,
+            true,
+            false
+          ],
+          "bearings": [
+            30,
+            90,
+            210
+          ],
+          "location": [
+            -3.703438,
+            40.419113
+          ]
+        }
+      ],
+      "driving_side": "right",
+      "geometry": "mjuuFnirUCGAE?I?EBQ?G?CAEAEACACCEGEuCkBGEKI",
+      "maneuver": {
+        "bearing_after": 95,
+        "bearing_before": 36,
+        "location": [
+          -3.703438,
+          40.419113
+        ],
+        "modifier": "right",
+        "type": "turn"
+      },
+      "name": "Calle de las Tres Cruces",
+      "mode": "driving",
+      "weight": 22.5,
+      "duration": 22.5,
+      "distance": 152.4
+    }
+  ]
+}

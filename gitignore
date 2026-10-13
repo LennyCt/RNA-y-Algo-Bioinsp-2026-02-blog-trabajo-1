@@ -1,0 +1,8 @@
+__pycache__/
+*.pyc
+.venv/
+.pytest_cache/
+.DS_Store
+
+# Salidas de la corrida de demostración de la parte 2 (datos sintéticos): se regeneran con --demo
+parte2_tsp/results/demo/
