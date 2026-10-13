@@ -4,10 +4,10 @@ Redes neuronales y algoritmos bioinspirados, Universidad Nacional de Colombia, s
 
 ```
 optimizacion/
-├── requirements.txt        entorno único, versiones fijas
-├── README.md               este archivo
 ├── Optimizacion_heuristica/        descenso por gradiente vs. AG, PSO y evolución diferencial
 └── Optimizacion_combinatoria/             TSP de las 47 capitales peninsulares: ACO y algoritmo genético
+requirements.txt        entorno único, versiones fijas
+README.md               este archivo
 ```
 
 Cada parte tiene su propio README con todos los comandos y opciones.
