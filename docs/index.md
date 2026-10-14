@@ -246,7 +246,7 @@ Las matrices de distancia y tiempo se obtienen una sola vez de la API Table de O
 | Dato | Fuente prevista | Estado |
 | --- | --- | --- |
 | Coordenadas de las 47 capitales | Fuente primaria (IGN, INE o ayuntamientos) | Las escribió la IA de memoria; solo pasan un control de cordura (rangos y 4 distancias desde Madrid con ±5 %) |
-| Distancias y tiempos | OSRM, API Table, perfil `driving` | Obtenido a partir de OSRM |
+| Distancias y tiempos | OSRM, API Table, perfil `driving` | Ubicado en data/distances.csv |
 | Peajes (2162 pares dirigidos) | Tarifas oficiales de cada concesionaria, clase 1 | **Pendiente:**  |
 | Vehículo y consumo | Ficha técnica del fabricante u homologación | Completo, vehiculo elegido Dacian Sanndero |
 | Precio del combustible | Fuente oficial con fecha | Fuente en experimet.json |
