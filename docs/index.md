@@ -4,7 +4,7 @@ title: "Trabajo 1: Optimización numérica, metaheurística y combinatoria"
 subtitle: "Reporte técnico · Redes neuronales y algoritmos bioinspirados · Universidad Nacional de Colombia · 2026-02"
 ---
 
-**Autores:** [PENDIENTE: nombres del equipo] · **Fecha:** 2026-10-13 · **Código:** [PENDIENTE: URL del repositorio y hash del commit de entrega]
+**Autores:** Lenny Alejandro Carvajal Taborda, Diego Fernando Juajibioy Chavez · **Fecha:** 2026-10-13 · **Código:** https://github.com/LennyCt/RNA-y-Algo-Bioinsp_Trabajo1.git
 
 ## Introducción y objetivos
 
