@@ -245,12 +245,11 @@ Las matrices de distancia y tiempo se obtienen una sola vez de la API Table de O
 
 | Dato | Fuente prevista | Estado |
 | --- | --- | --- |
-| Coordenadas de las 47 capitales | Fuente primaria (IGN, INE o ayuntamientos) | **Sin verificar:** las escribió la IA de memoria; solo pasan un control de cordura (rangos y 4 distancias desde Madrid con ±5 %) |
-| Distancias y tiempos | OSRM, API Table, perfil `driving` | **Pendiente:** requiere ejecutar `build_data.py` con Internet; hay que registrar el endpoint y la fecha |
-| Peajes (2162 pares dirigidos) | Tarifas oficiales de cada concesionaria, clase 1 | **Pendiente:** `toll_costs.csv` es una plantilla; el programa se niega a correr con algún par sin importe, fuente y fecha, y un valor vacío nunca se toma como cero |
-| Vehículo y consumo | Ficha técnica del fabricante u homologación | **Pendiente:** hay valores de ejemplo (6.0 L/100 km) marcados `documented: false` |
-| Precio del combustible | Fuente oficial con fecha | **Pendiente:** ejemplo de 1.60 EUR/L sin fuente |
-| Silueta de España para el mapa | Natural Earth u otra | Opcional, pendiente |
+| Coordenadas de las 47 capitales | Fuente primaria (IGN, INE o ayuntamientos) | Las escribió la IA de memoria; solo pasan un control de cordura (rangos y 4 distancias desde Madrid con ±5 %) |
+| Distancias y tiempos | OSRM, API Table, perfil `driving` | Obtenido a partir de OSRM |
+| Peajes (2162 pares dirigidos) | Tarifas oficiales de cada concesionaria, clase 1 | **Pendiente:**  |
+| Vehículo y consumo | Ficha técnica del fabricante u homologación | Completo, vehiculo elegido Dacian Sanndero |
+| Precio del combustible | Fuente oficial con fecha | Fuente en experimet.json |
 
 **Método para los peajes: decisión pendiente del equipo.** Identificar los tramos de peaje de cada itinerario y sumar las tarifas oficiales exige decidir cuánto del trabajo se hace a mano y cuánto se aproxima. Se exploró detectar los tramos automáticamente con OSRM y OpenStreetMap, pero esa vía se descartó y su código se retiró del repositorio (ver la cacería de la alucinación). Cualquier método que se adopte debe declarar si el importe es oficial o una estimación.
 
@@ -273,7 +272,7 @@ Las matrices de distancia y tiempo se obtienen una sola vez de la API Table de O
 
 Todo el trabajo se regenera desde un repositorio con un solo entorno para las dos partes. **[PENDIENTE: URL del repositorio y hash del commit de entrega; probar un clon limpio en otra máquina.]**
 
-- **Entorno:** Python 3.11 o superior (probado con 3.13) y `requirements.txt` con versiones fijas: numpy 2.5.3, pandas 3.0.5, matplotlib 3.11.2, pillow 12.3.0 y requests 2.34.2. Las versiones instaladas coinciden con las fijadas; la instalación con `pip install -r requirements.txt` todavía no se probó en una máquina limpia.
+- **Entorno:** Python 3.11 o superior (probado con 3.13/3.14) y `requirements.txt` con versiones fijas: numpy 2.5.3, pandas 3.0.5, matplotlib 3.11.2, pillow 12.3.0 y requests 2.34.2. Las versiones instaladas coinciden con las fijadas; la instalación con `pip install -r requirements.txt` todavía no se probó en una máquina limpia.
 - **Semillas:** parte 1, base 12345; parte 2, base 42; la corrida i usa base + i. Mismas semillas, mismos resultados (hay una prueba para la parte 2 y el resultado de la parte 1 no cambió entre versiones de las bibliotecas).
 - **Parámetros:** se cambian por línea de comandos o por un JSON, sin editar el código (`--param método.nombre=valor`).
 - **Datos:** una vez generados los CSV de `parte2_tsp/data/`, la ejecución no usa Internet.
