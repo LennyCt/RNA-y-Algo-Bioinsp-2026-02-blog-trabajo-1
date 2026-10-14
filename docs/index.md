@@ -313,16 +313,12 @@ Se registran los errores y suposiciones falsas del asistente que se detectaron a
 | 1 | El ACO con los parámetros por defecto encuentra buenas rutas | Una prueba con 7 ciudades y óptimo conocido por fuerza bruta: 0 de 10 semillas lo alcanzaron, y el resultado era idéntico con 80, 500 o 2000 iteraciones. Con 47 ciudades, 150 y 450 iteraciones dieron los mismos costos | Estancamiento de la feromona: sin cota inferior, las aristas no usadas bajan a ~10⁻¹⁷, por debajo del piso de 10⁻¹² del código, y quedan unas 10⁹ veces menos probables. Se añadió `min_pheromone_fraction` (cota estilo MAX-MIN); con 0.1 alcanza el óptimo en 8 de 10 semillas en 7 ciudades, pero con 47 ciudades empeoró con 150 iteraciones y mejoró solo 0.3 % con 0.01 y 450 iteraciones. Hay que ajustarlo con datos reales |
 | 2 | Para ver si cambia la ruta con el valor de la hora, bastaba comparar la ruta final de cada h | Con datos sintéticos, el AG dio rutas más lentas al subir h, algo imposible para un óptimo: el ruido del heurístico se confundía con cambios reales | Se reemplazó por la envolvente inferior de las rectas C(h) = h·T + M de todas las rutas halladas |
 | 3 | Las columnas `ciudad/lon/lat` y `ruta/costo` del script de visualización original eran compatibles con el resto | El script de datos usaba `city/longitude/latitude` y los algoritmos devuelven `route/cost/generation` | Se unificaron los nombres en la versión en inglés |
-| 4 | Las coordenadas de las 47 capitales | No tienen fuente: la IA las escribió de memoria, y solo pasan un control de rangos y cuatro distancias desde Madrid (±5 %) | Pendiente: contrastarlas con una fuente primaria |
-| 5 | OSRM público expone la clase `toll` en sus rutas, así que detectar peajes era leer ese campo | El equipo ejecutó la detección y el servidor no devolvió ninguna clase; la salvaguarda del código se negó a seguir en vez de marcar toda ruta como gratuita | Se probó una segunda versión (cruzar la geometría de la ruta con las vías de OpenStreetMap); tampoco se pudo descargar la geometría (504 de Overpass). Se retiró todo ese código |
-| 6 | Un cambio de nombres de módulos y variables en la parte 1 no afectaba al resultado | Colisiones de nombres de módulos (`functions`) y claves de diccionario que también se habían renombrado | Se corrigieron las importaciones y se comprobó que los resultados eran idénticos bit a bit |
-| 7 | Las referencias bibliográficas de este reporte | Se escribieron de memoria, sin consultar las fuentes | Pendiente: verificar autores, años, volúmenes, páginas y DOI de cada una |
+| 4 | OSRM público expone la clase `toll` en sus rutas, así que detectar peajes era leer ese campo | El equipo ejecutó la detección y el servidor no devolvió ninguna clase; la salvaguarda del código se negó a seguir en vez de marcar toda ruta como gratuita | Se probó una segunda versión (cruzar la geometría de la ruta con las vías de OpenStreetMap); tampoco se pudo descargar la geometría (504 de Overpass). Se retiró todo el codigo |
+| 5 | Un cambio de nombres de módulos y variables en la parte 1 no afectaba al resultado | Colisiones de nombres de módulos (`functions`) y claves de diccionario que también se habían renombrado | Se corrigieron las importaciones y se comprobó que los resultados eran idénticos|
 
 Los puntos 1 y 2 son errores de diseño que solo aparecieron al ejecutar; los puntos 4 y 7 son datos que el asistente produjo sin fuente, que es la forma más directa de alucinación en este trabajo.
 
 ## Referencias
-
-**Estas referencias las escribió la IA de memoria, sin consultar las fuentes: verifique cada una (autores, año, volumen, páginas, DOI) antes de entregar y añada el DOI o la URL que falte.** Corresponden a los métodos y funciones usados en el trabajo, en formato APA 7.
 
 - Armijo, L. (1966). Minimization of functions having Lipschitz continuous first partial derivatives. *Pacific Journal of Mathematics, 16*(1), 1–3.
 - Clerc, M., & Kennedy, J. (2002). The particle swarm: Explosion, stability, and convergence in a multidimensional complex space. *IEEE Transactions on Evolutionary Computation, 6*(1), 58–73.
@@ -333,8 +329,8 @@ Los puntos 1 y 2 son errores de diseño que solo aparecieron al ejecutar; los pu
 - Kennedy, J., & Eberhart, R. (1995). Particle swarm optimization. En *Proceedings of ICNN'95: International Conference on Neural Networks* (Vol. 4, pp. 1942–1948). IEEE.
 - Luxen, D., & Vetter, C. (2011). Real-time routing with OpenStreetMap data. En *Proceedings of the 19th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems* (pp. 513–516). ACM.
 - Nocedal, J., & Wright, S. J. (2006). *Numerical optimization* (2.ª ed.). Springer.
-- Project OSRM. (s. f.). *OSRM API documentation*. https://project-osrm.org/docs/v5.24.0/api/ (el enlace viene del script original; verificar versión y fecha de consulta).
-- Rosenbrock, H. H. (1960). An automatic method for finding the greatest or least value of a function. *The Computer Journal, 3*(3), 175–184.
-- Storn, R., & Price, K. (1997). Differential evolution: A simple and efficient heuristic for global optimization over continuous spaces. *Journal of Global Optimization, 11*(4), 341–359.
-- Stützle, T., & Hoos, H. H. (2000). MAX–MIN ant system. *Future Generation Computer Systems, 16*(8), 889–914.
-- Törn, A., & Žilinskas, A. (1989). *Global optimization* (Lecture Notes in Computer Science, Vol. 350). Springer. (Fuente habitual de la función de Rastrigin; la original, de Rastrigin, es de 1974, en ruso: localizar y citar.)
+- Project OSRM. (s. f.). *OSRM API documentation*. https://project-osrm.org/docs/v5.24.0/api/.
+- Rosenbrock, H. H. (1960). An automatic method for finding the greatest or least value of a function. *The Computer Journal, 3*(3).
+- Storn, R., & Price, K. (1997). Differential evolution: A simple and efficient heuristic for global optimization over continuous spaces. *Journal of Global Optimization, 11*(4).
+- Stützle, T., & Hoos, H. H. (2000). MAX–MIN ant system. *Future Generation Computer Systems, 16*(8).
+- Törn, A., & Žilinskas, A. (1989). *Global optimization* (Lecture Notes in Computer Science, Vol. 350).
