@@ -319,7 +319,6 @@ Se registran los errores y suposiciones falsas del asistente que se detectaron a
 | 4 | OSRM público expone la clase `toll` en sus rutas, así que detectar peajes era leer ese campo | El equipo ejecutó la detección y el servidor no devolvió ninguna clase; la salvaguarda del código se negó a seguir en vez de marcar toda ruta como gratuita | Se probó una segunda versión (cruzar la geometría de la ruta con las vías de OpenStreetMap); tampoco se pudo descargar la geometría (504 de Overpass). Se retiró todo el codigo |
 | 5 | Un cambio de nombres de módulos y variables en la parte 1 no afectaba al resultado | Colisiones de nombres de módulos (`functions`) y claves de diccionario que también se habían renombrado | Se corrigieron las importaciones y se comprobó que los resultados eran idénticos|
 
-Los puntos 1 y 2 son errores de diseño que solo aparecieron al ejecutar; los puntos 4 y 7 son datos que el asistente produjo sin fuente, que es la forma más directa de alucinación en este trabajo.
 
 ## Referencias
 
