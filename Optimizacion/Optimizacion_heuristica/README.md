@@ -19,17 +19,18 @@ desde esta carpeta (`parte1_numerica/`).
 
 ```bash
 python main.py check          # compara gradientes analíticos con diferencias finitas
-python main.py compare        # 30 corridas, 2 funciones, 2D y 3D, 4 métodos 
+python main.py compare        # 30 corridas, 2 funciones, 2D y 3D, 4 métodos
 python main.py compare --functions rastrigin --dims 2 --methods gd de --runs 10
 python main.py compare --threshold 1e-2 --budget-per-dim 20000
 python main.py compare --param ga.pop_size=80 --param de.F=0.8 --param gd.line_search=fixed --param gd.lr=1e-3
 python main.py compare --config config.json
-python main.py animate --method gd  --function rosenbrock --seed 3     
+python main.py curves         # PNG de convergencia (mediana de 30 corridas) en resultados/graficas
+python main.py animate --method gd  --function rosenbrock --seed 3     # GIF en 2D
 python main.py animate --method pso --function rastrigin  --seed 3 --max-frames 30
 python main.py -h             # también: compare -h, animate -h
 ```
 
-Salidas: `resultados/tablas/` (`runs.csv`, `summary.csv`) y `resultados/animaciones/` (GIF).
+Salidas: `resultados/tablas/` (`runs.csv`, `summary.csv`), `resultados/graficas/` (curvas de convergencia, `curvas.py`) y `resultados/animaciones/` (GIF).
 `python funciones.py` y `python visualizacion.py` son scripts de prueba sueltos (el segundo genera
 una gráfica y dos GIF de ejemplo).
 

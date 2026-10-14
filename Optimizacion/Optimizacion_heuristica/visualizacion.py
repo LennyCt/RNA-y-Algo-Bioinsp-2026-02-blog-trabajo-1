@@ -391,7 +391,7 @@ def create_population_animation(
 
     return animation
 
-
+"""
 # Función temporal para probar las gráficas.
 def funcion_prueba(X):
     x, y = X
@@ -454,3 +454,4 @@ create_population_animation(
     output_filename="prueba_poblacion.gif",
     title="Prueba de población"
 )
+"""

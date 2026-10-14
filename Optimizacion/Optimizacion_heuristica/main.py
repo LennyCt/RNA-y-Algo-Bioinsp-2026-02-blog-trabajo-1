@@ -6,6 +6,7 @@ Punto de entrada. Todo se controla por línea de comandos o por un JSON.
   python main.py compare --param ga.pop_size=80 --param gd.line_search=fixed --param gd.lr=1e-3
   python main.py animate --method gd  --function rosenbrock --seed 3
   python main.py animate --method pso --function rastrigin  --seed 3
+  python main.py curves --runs 30                     (PNG de convergencia en resultados/graficas)
   python main.py compare --config config.json      (las claves son los mismos flags)
 
 Parámetros por método: --param method.name=value  (method in gd, ga, pso, de)
@@ -94,6 +95,16 @@ def cmd_animate(a):
     print(f"f final = {res['best_f']:.3e}")
 
 
+def cmd_curves(a):
+    from curvas import plot_convergence
+    params = parse_params(a.param)
+    for fn in a.functions:
+        for dim in a.dims:
+            path = plot_convergence(fn, dim, a.runs, a.seed, a.budget_per_dim * dim,
+                                    a.output, params)
+            print("Guardado", path)
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -118,6 +129,14 @@ def main():
     pc.add_argument("--threshold", type=float, default=1e-3)
     pc.add_argument("--output", default="resultados/tablas")
 
+    pv = sub.add_parser("curves", help="PNG de convergencia (mediana de las corridas)")
+    add_common(pv)
+    pv.add_argument("--functions", nargs="+", default=["rosenbrock", "rastrigin"],
+                    choices=PROBLEMS)
+    pv.add_argument("--dims", nargs="+", type=int, default=[2, 3])
+    pv.add_argument("--runs", type=int, default=30)
+    pv.add_argument("--output", default="resultados/graficas")
+
     pn = sub.add_parser("animate", help="GIF de una corrida en 2D")
     add_common(pn)
     pn.add_argument("--method", required=True, choices=METHODS)
@@ -137,6 +156,8 @@ def main():
         check_gradients(2); check_gradients(3)
     elif a.cmd == "compare":
         cmd_compare(a)
+    elif a.cmd == "curves":
+        cmd_curves(a)
     else:
         cmd_animate(a)
 

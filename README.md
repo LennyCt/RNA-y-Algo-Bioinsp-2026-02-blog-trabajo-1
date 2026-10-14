@@ -28,12 +28,12 @@ Los comandos se ejecutan **desde la carpeta de cada parte**.
 
 ```bash
 # Parte 1: comparación de 30 corridas y un GIF (sin Internet)
-cd Optimizacion_heuristica
+cd Optimizacion/Optimizacion_heuristica
 python main.py compare
 python main.py animate --method pso --function rastrigin --seed 3
 
 # Parte 2: demostración con datos sintéticos (sin Internet) y pruebas
-cd Optimizacion_combinatoria
+cd Optimizacion/Optimizacion_combinatoria
 python main.py run --demo
 python -m unittest discover -s tests
 ```
