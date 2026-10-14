@@ -1,4 +1,4 @@
-# Entorno único para las dos partes (probado con Python 3.13).
+# Entorno único para las dos partes (probado con Python 3.13/3.14).
 # requests solo lo usa parte2_tsp/build_data.py al consultar OSRM.
 numpy==2.5.3
 pandas==3.0.5
