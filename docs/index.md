@@ -304,7 +304,7 @@ python -m unittest discover -s tests # 35 pruebas (~4 s)
 | Implementar los tests de los algoritmos y corregir test de la matriz | test_aco.py, test_genetic_algorithm y test_cost__matrix.py corregido | Se usaron los tests con datos sinteticos |
 | Completar y corregir comentarios | La gran parte de comentarios | Se verificaron la mayoria de comentarios |
 | Generar archivos complementarios de la parte 2 | build_data.py (a partir de OSRM), main.py, tsp_data.py, sources.md, requirements.txt y README.md | Se verificaron los datos extraidos |
-| Generar reporte en markdown a partir de documento y complementos | Produjo la gran mayoria del texto de este documento | Se valido en la pagina del blog |
+| Generar reporte en markdown a partir de documento y complementos | Produjo la gran mayoria del texto de este documento y los otros archivos en docs | Se valido en la pagina del blog |
 
 
 ## Cacería de la alucinación
