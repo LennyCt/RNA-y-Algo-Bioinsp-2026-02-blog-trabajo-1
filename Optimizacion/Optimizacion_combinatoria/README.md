@@ -26,17 +26,31 @@ python -m unittest discover -s tests   # 35 pruebas
 
 Resultados en `results/demo/`.
 
-## Flujo con datos reales
+## Datos reales
 
-1. **Coordenadas**: verificar `data/cities.csv` contra una fuente primaria y regístrenla en `data/sources.md`.
-2. **Distancias y tiempos** (una sola vez, con Internet):
-   `python build_data.py` → `data/distances.csv` (km), `data/travel_times.csv` (h), `data/osrm_metadata.json`.
-   El servicio público de OSRM tiene límites: no lo ejecuten repetidamente ni en paralelo.
-3. **Peajes**: completen `data/toll_costs.csv` (una fila por par dirigido): `toll_eur`, `toll_status=verified`,
-   `source_url` y `consultation_date`. Un campo vacío **no** equivale a cero; `main.py` se niega a correr si
-   queda algún par sin verificar.
-4. `python build_data.py --skip-osrm` regenera `fuel_costs.csv` y `cost_matrix.csv`; luego
-   `python main.py validate` y `python main.py run`.
+Los datos ya están en `data/` (no hace falta Internet ni volver a generarlos):
+
+| Archivo | Contenido |
+|---|---|
+| `cities.csv` | 47 capitales con coordenadas de Wikidata |
+| `distances.csv`, `travel_times.csv` | km y horas por carretera (Valhalla, ruta más rápida con peajes) |
+| `toll_costs.csv` | peaje de cada par dirigido (2162 filas) con fuente y fecha |
+| `fuel_costs.csv`, `cost_matrix.csv` | combustible y costo total con el valor de la hora de referencia |
+| `valhalla/` | datos originales: rutas, tarifas de peaje 2026, precios de combustible y `FUENTES.md` |
+| `osrm/` | primera versión con OSRM, solo para comparar |
+
+Fuentes, fechas y limitaciones: [`sources.md`](sources.md).
+
+Para regenerar las matrices desde `data/valhalla/`, por ejemplo después de cambiar una tarifa en
+`data/valhalla/peajes_2026.csv`:
+
+```bash
+python importar_valhalla.py      # distances, travel_times, toll_costs y cities
+python build_data.py --skip-osrm --hourly-value 20 --consumption 5.3 --fuel-price 1.7961
+python main.py validate
+```
+
+Un peaje vacío **no** equivale a cero: `main.py` se niega a correr si falta algún par en `toll_costs.csv`.
 
 ## Comandos
 
@@ -94,13 +108,16 @@ de la mejor ruta conocida.
 
 ```
 main.py                  interfaz de línea de comandos (validate, run, sweep)
-aco.py, genetic_algorithm.py   algoritmos
+aco.py, algoritmo_genetico.py   algoritmos
 tsp_data.py              carga de datos, matriz de costos, desglose de rutas
-tsp_visualization.py     figuras y GIF sobre el mapa
-build_data.py            OSRM -> matrices; plantilla de peajes; datos demo
+tsp_visualizacion.py     figuras y GIF sobre el mapa
+importar_valhalla.py     data/valhalla -> distances, travel_times, toll_costs, cities
+build_data.py            matrices de combustible y costos; datos demo (y consulta OSRM original)
 config/experiment.json   semilla, corridas, vehículo, hiperparámetros
-data/                    cities.csv, toll_costs.csv (plantilla), sources.md, demo/
+sources.md               fuentes y fechas de todos los datos
+data/                    matrices usadas por main.py; valhalla/ (originales), osrm/ (comparación), demo/
 tests/                   35 pruebas (unittest)
+preparar_mapa.py         data/valhalla/spain-provinces.geojson -> data/spain_peninsular.geojson
 results/                 salidas
 ```
 
