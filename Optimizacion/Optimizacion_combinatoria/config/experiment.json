@@ -1,18 +1,15 @@
 {
-  "_comment": "Valores de ejemplo: reemplacen el vehiculo y el precio por los documentados en el reporte y pongan vehicle.documented=true.",
   "seed": 42,
   "runs": 3,
   "hourly_value_eur": 20.0,
-  
   "vehicle": {
-    "description": "Dacia Sandero Essential TCe 100 (gasolina, manual, WLTP)",
+    "description": "Dacia Sandero TCe 90 (gasolina, 67 kW)",
     "consumption_l_per_100km": 5.3,
-    "fuel_price_eur_per_liter": 1.787,
-    "fuel_price_source_url": "https://tankeo.es/precio-gasolina-hoy/",
+    "fuel_price_eur_per_liter": 1.7961,
+    "fuel_price_source_url": "https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/",
     "fuel_price_consultation_date": "2026-10-13",
     "documented": true
   },
-
   "aco": {
     "iterations": 150,
     "alpha": 1.0,

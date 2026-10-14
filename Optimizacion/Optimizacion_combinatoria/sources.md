@@ -1,80 +1,101 @@
-# Fuentes y criterios de los datos
+# Fuentes y criterios de los datos (Parte 2: TSP)
 
-Documento vivo: complétenlo y consérvenlo con el reporte final. Cada dato debe tener
-fuente y **fecha de consulta**. Estado actual de cada bloque entre corchetes.
+Todos los datos se consultaron el **13 de octubre de 2026** y están guardados en `data/`:
+la ejecución no necesita Internet. El detalle técnico de cada archivo de `data/valhalla/`
+(servidor, endpoints, advertencias por autopista) está en
+[`data/valhalla/FUENTES.md`](data/valhalla/FUENTES.md).
 
-## Ciudades y coordenadas [PENDIENTE DE VERIFICAR]
+## Ciudades y coordenadas
 
-- `cities.csv`: las 47 capitales de provincia de la España peninsular (50 provincias menos
+- `data/cities.csv`: las 47 capitales de provincia de la España peninsular (50 provincias menos
   Palma, Las Palmas de Gran Canaria y Santa Cruz de Tenerife; Ceuta y Melilla no son provincias).
-- Las coordenadas (WGS84, 4 decimales) se escribieron **de memoria del asistente de IA**, sin
-  consultar una fuente. Hay que contrastarlas con una fuente primaria (p. ej. IGN, INE o el
-  Ayuntamiento de cada capital) y anotar aquí fuente y fecha. Criterio a documentar: punto
-  representativo del casco urbano.
-- Control de cordura ya automatizado (`tests/test_cost_matrix.py`): 47 nombres únicos, rangos
-  geográficos y cuatro distancias en línea recta desde Madrid dentro de ±5 % de valores
-  aproximados. **No sustituye la verificación.**
+- Coordenadas WGS84 de Wikidata (propiedad P625 de cada municipio), consultadas en
+  https://query.wikidata.org. La columna `wikidata` guarda el identificador de cada ciudad para
+  que cualquiera pueda verificarla.
+- Versión anterior: las coordenadas originales se habían escrito de memoria con un asistente de IA,
+  sin fuente. Al compararlas con Wikidata difieren como máximo 1,6 km (A Coruña), pero no eran
+  citables y se reemplazaron.
 
-## Distancias y tiempos [PENDIENTE: requiere ejecutar `build_data.py` con Internet]
+## Distancias y tiempos
 
-- Motor: OSRM, Table API (`/table/v1/driving`), perfil `driving`.
-- Endpoint por defecto: https://router.project-osrm.org (servicio público con límites de uso).
-- Documentación: https://project-osrm.org/docs/v5.24.0/api/ (enlace tomado del script original; verifíquenlo).
-- Se guardan `distances.csv` (km) y `travel_times.csv` (h), y `osrm_metadata.json` con endpoint y
-  fecha de consulta.
-- OSRM devuelve la ruta **más rápida** según el perfil: no necesariamente la de menor distancia ni
-  la de menor costo. La matriz puede ser asimétrica (A→B ≠ B→A).
-- Para máxima reproducibilidad: instancia OSRM propia con una instantánea de OpenStreetMap
-  identificada por fecha.
+- Motor: **Valhalla 3.9.1**, servidor público de FOSSGIS (https://valhalla1.openstreetmap.de),
+  teselas generadas desde OpenStreetMap el 2026-10-13 a las 11:26 UTC. Endpoint `/route`, perfil auto.
+- Para cada par se usa la ruta más rápida con peajes permitidos (`use_tolls=1`). Distancia en km y
+  tiempo en horas: `data/distances.csv` y `data/travel_times.csv`, generados por
+  `python importar_valhalla.py` a partir de `data/valhalla/rutas_valhalla.csv`.
+- Las rutas se calcularon en ambos sentidos y se promediaron, así que las matrices son simétricas.
+- Se usa la misma ruta para el tiempo, la distancia y los peajes. Así el costo de cada tramo
+  corresponde a un único viaje real.
+- Excepción: si la ruta más rápida cruza Portugal (Badajoz–Pontevedra, Huelva–Pontevedra), se usa
+  la ruta sin peajes por España, porque los peajes portugueses no se modelan.
+- **Comparación con OSRM.** La primera versión usaba OSRM (Table API,
+  https://router.project-osrm.org). Esos datos se conservan en `data/osrm/`. Frente a Valhalla, la
+  diferencia relativa de distancia tiene mediana 1,7 %, percentil 95 de 16,5 % y máximo de 50 %.
+  Por eso no se mezclan peajes medidos sobre una ruta con tiempos y distancias de la otra.
 
-## Peajes [PENDIENTE: 2162 pares dirigidos por verificar]
+## Peajes
 
-- `toll_costs.csv` tiene una fila por par dirigido (47 × 46) con `toll_status =
-  pending_official_verification`. `main.py` **se niega a ejecutar** con datos reales mientras
-  quede alguno sin importe, estado `verified`, `source_url` y `consultation_date`.
-- Un peaje vacío nunca se interpreta como cero. Cero solo es válido si se verificó que el trayecto
-  no paga peaje, con `toll_status=verified` y una fuente que lo justifique.
-- Método a documentar: identificar los tramos de peaje del itinerario devuelto por OSRM y sumar las
-  tarifas oficiales de cada concesionaria para la clase de vehículo elegida (turismo, clase 1).
-  La red de autopistas de peaje ha cambiado mucho en los últimos años: anoten la fecha de cada
-  tarifa y vuelvan a comprobarla antes de publicar.
-- Fuente general indicada en el script original (verifíquenla):
-  https://administracion.gob.es/tu-espacio-europeo/derechos-obligaciones/ciudadanos/vehiculos/normas-trafico-viales/peajes-vinetas
-- Detección automática (`toll_tools.py`), método `geometry`: ruta completa de OSRM Route API
-  (`overview=full`) cruzada con la geometría de las vías `toll=yes` (motorway/trunk/primary/secondary/tertiary y
-  enlaces) descargada de Overpass (`out geom`); método alternativo `classes` (clase `toll` de OSRM). Inventario
-  opcional de casetas y pórticos (`barrier=toll_booth`, `highway=toll_gantry`). Fuente de los datos: © OpenStreetMap contributors (ODbL). Fecha de consulta en
-  `toll_detection.jsonl` y `osm_toll_metadata.json`. Ambas dependen de las mismas etiquetas, no son
-  validación independiente. Estados `derived_osrm_no_toll` y `estimated_per_km` NO son importes oficiales.
-- Tarifas por km: `data/toll_rates.csv` (cada fila con fuente y fecha). La fila `*` es una tarifa media
-  (mediana 0.105 EUR/km de la tabla de https://www.autofacil.es/pejaes-cuesta-kilometro/, que cita a
-  Automovilistas Europeos Asociados, datos de 2019, consultada el 2026-10-13): APROXIMACIÓN, sin clase de vehículo
-  especificada ni actualización; importes exactos: `data/toll_overrides.csv`.
-- Las fuentes por tramo (URL de cada concesionaria) van en la columna `source_url`.
+- Tarifas 2026 para vehículos ligeros, tarifa general sin descuentos: `data/valhalla/peajes_2026.csv`,
+  con una fila por autopista y su URL oficial (Ministerio de Transportes y Movilidad Sostenible,
+  SEITT, Bidegi, Interbiak, Audenasa).
+- Km recorridos en cada autopista de peaje: medidos arista por arista sobre la ruta de Valhalla
+  (`/trace_attributes`) con las vías marcadas `toll=yes` en OpenStreetMap
+  (`data/valhalla/raw/peajes_aristas.txt`). El nombre de cada vía en OSM se asigna a su grupo
+  tarifario con `data/valhalla/mapa_refs_peaje.csv`.
+- Cálculo para el par i→j:
 
-## Combustible y vehículo [PENDIENTE]
+      tarifa_por_km(autopista) = peaje oficial de un recorrido de referencia / km de ese recorrido
+      peaje(i, j) = Σ km_en_autopista × tarifa_por_km  +  cuotas fijas (túneles de Artxanda)
 
-- Vehículo (modelo, motorización), consumo homologado y fuente (ficha técnica del fabricante o
-  base oficial de homologación): por elegir. Se registran en `config/experiment.json`
-  (`vehicle`); ahí hay valores de ejemplo con `documented: false`.
-- Precio del combustible, fuente y fecha de consulta: por completar en el mismo bloque.
-- Fórmula: `distancia_km × consumo_L/100km / 100 × precio_EUR/L`.
+  Los km de referencia se miden con el mismo motor de rutas (`data/valhalla/build_rutas.py`).
+- `data/toll_costs.csv` tiene una fila por par dirigido (47 × 46 = 2162). En `source_url` van las URL
+  de las tarifas usadas; en `notes`, los km por autopista. Si la ruta no pasa por ninguna autopista
+  de peaje, el peaje es 0 y la fuente es la propia ruta de Valhalla.
+- Un peaje vacío nunca se interpreta como cero: `main.py` se niega a ejecutar si falta algún par.
+- **Limitaciones** (se discuten en el reporte):
+  - Prorratear por km es una aproximación: en la realidad se paga por tramo o caseta.
+  - Se supone el mismo peaje en los dos sentidos.
+  - No se modelan descuentos por recurrencia ni tarifas nocturnas.
+- **Advertencias** (detalle en `data/valhalla/FUENTES.md`):
+  - **AP-68 Bilbao–Zaragoza**: la concesión termina el **10/11/2026**. Después de esa fecha su peaje
+    es 0. Para simularlo, poner `peaje_eur = 0` en la fila AP-68 de `peajes_2026.csv` y volver a
+    ejecutar `python importar_valhalla.py`.
+  - **AP-15**: la columna de la tabla de Audenasa se interpretó como vehículos ligeros. Pendiente de
+    confirmar.
+  - **C-32**: tarifa tomada de una fuente secundaria (Diari Més, que cita el DOGC).
+  - **R-4 y AP-36**: el PDF se titula 2026 pero dice "En vigor desde el 1 de enero de 2025".
+  - Autopistas ya liberadas, que no se cobran: AP-1 Burgos–Armiñón (2018), AP-4 y AP-7
+    Tarragona–Alicante (2019), AP-7 Tarragona–La Jonquera y AP-2 (2021), AP-7 Circunvalación de
+    Alicante (2025).
+
+## Vehículo y combustible
+
+- Vehículo: **Dacia Sandero TCe 90** (gasolina, 67 kW / 91 CV). Consumo WLTP combinado
+  **5,3 L/100 km**. Fuente: ADAC Autokatalog,
+  https://www.adac.de/rund-ums-fahrzeug/autokatalog/marken-modelle/dacia/sandero/3generation/334757
+- Precio: **Gasolina 95 E5, 1,7961 €/L**. Es la media simple de 10 238 estaciones de la España
+  peninsular (mediana 1,815; percentil 10: 1,679; percentil 90: 1,889).
+  Fuente: Geoportal de Gasolineras del Ministerio para la Transición Ecológica y el Reto
+  Demográfico (MITECO), API REST
+  https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/,
+  dato del 13/10/2026 a las 22:02:48. Medias por provincia en
+  `data/valhalla/combustible_por_provincia_2026-10-13.csv`.
+- Limitaciones: es una media no ponderada por ventas y corresponde a un solo día.
+- Fórmula: `combustible(i, j) = km(i, j) × 5,3 / 100 × 1,7961`. Estos valores están en
+  `config/experiment.json` y se pueden cambiar con `--consumption` y `--fuel-price`.
 
 ## Valor de la hora
 
-- Parámetro experimental en EUR/h, no un dato de carretera. `python main.py sweep` estudia a partir
-  de qué valor cambia la ruta; registren en el reporte los valores ensayados.
+- Es un parámetro experimental en €/h, no un dato de carretera. `python main.py sweep` estudia a
+  partir de qué valor cambia la ruta. Los valores ensayados se registran en el reporte.
 
-## Silueta de España (opcional) [PENDIENTE]
+## Silueta de España
 
-- Para dibujar el contorno en las figuras y GIF, guarden un GeoJSON de España peninsular (sin islas)
-  en `data/spain_peninsular.geojson`; `main.py` lo usa automáticamente. Sin él, la ruta se dibuja sobre
-  el plano longitud/latitud y se emite una advertencia.
-- Posible fuente: Natural Earth (dominio público, https://www.naturalearthdata.com/), filtrando los
-  polígonos de España continental. Anoten la fuente y la fecha.
+- Polígonos de provincias: `data/valhalla/spain-provinces.geojson`, del repositorio click_that_hood
+  de Code for America (GitHub), consultado el 2026-10-13. data/spain_peninsular.geojson se genera con python preparar_mapa.py, que quita Illes Balears, Las Palmas, Santa Cruz de Tenerife, Ceuta y Melilla (quedan las 47 provincias peninsulares).
 
 ## Datos sintéticos de demostración
 
-- `data/demo/` contiene datos **inventados** (distancia en línea recta × 1.25 con ruido, peajes
-  aleatorios) generados con `python build_data.py --demo`. Sirven para probar el código sin Internet.
+- `data/demo/` contiene datos **inventados** para probar el código sin Internet: distancia en línea
+  recta × 1,25 con ruido y peajes aleatorios. Se generan con `python build_data.py --demo`.
   **No se pueden citar en el reporte.** Toda ejecución con ellos imprime un aviso.
