@@ -97,7 +97,7 @@ $$
 
 ### Problema del viajante con costo monetario (parte 2)
 
-Se busca la permutación π de las 47 ciudades que minimiza el costo del circuito cerrado. El costo del tramo i → j no es simétrico, porque el tiempo y los peajes dependen del sentido:
+Se busca la permutación π de las 47 ciudades que minimiza el costo del circuito cerrado. En general el costo del tramo i → j puede depender del sentido; con los datos usados (promedio de las rutas de ida y de vuelta) la matriz resulta simétrica:
 
 $$
 c_{ij}(h) = h\,t_{ij} + p_{ij} + d_{ij}\,\frac{l}{100}\,\pi_{\text{comb}}, \qquad C(\pi, h) = \sum_{k} c_{\pi_k \pi_{k+1}}(h)
@@ -229,44 +229,149 @@ Las dos funciones fallan al gradiente por razones distintas, y esa diferencia es
 
 ## Parte 2: datos y metodología
 
-El código de la parte 2 está completo, pero ninguno de sus datos de entrada está todavía verificado, así que esta sección describe el método y deja marcado, dato por dato, qué falta. Cada dato debe quedar con su fuente y su fecha de consulta (`data/sources.md`).
+Todos los datos se consultaron el 13 de octubre de 2026 y están guardados en el repositorio (`data/`), así que la ejecución no usa Internet. Las fuentes, fechas y limitaciones de cada dato están en `sources.md` y en `data/valhalla/FUENTES.md`.
 
-**Instancia.** 47 capitales de provincia de la España peninsular: las 50 provincias menos Palma, Las Palmas de Gran Canaria y Santa Cruz de Tenerife. Ceuta y Melilla no son capitales de provincia.
+**Instancia.** 47 capitales de provincia de la España peninsular: las 50 provincias menos Palma, Las Palmas de Gran Canaria y Santa Cruz de Tenerife. Ceuta y Melilla no son capitales de provincia. Las coordenadas se tomaron de Wikidata (propiedad P625), y el identificador de cada ciudad queda en `data/cities.csv` para que se pueda verificar.
 
 **Costo por tramo.** Para ir de i a j se suman tres componentes, todos en euros:
 
 - **Tiempo:** valor de la hora × horas de viaje.
-- **Peajes:** importe del trayecto para un turismo de clase 1.
+- **Peajes:** importe del trayecto para un vehículo ligero, sin descuentos.
 - **Combustible:** kilómetros × consumo (L/100 km) / 100 × precio del litro.
 
-Las matrices de distancia y tiempo se obtienen una sola vez de la API Table de OSRM, que devuelve la ruta más rápida según el perfil, no necesariamente la más corta ni la de menor costo; por eso la matriz puede ser asimétrica. Una vez guardadas en `data/`, la ejecución no depende de Internet.
+**Distancias y tiempos.** Se calcularon con Valhalla 3.9.1, un motor de rutas de código abierto sobre OpenStreetMap, en el servidor público de FOSSGIS. Para cada par se usa la ruta más rápida con peajes permitidos, calculada en los dos sentidos y promediada; por eso la matriz es simétrica. La mediana de los tramos es de 536 km y 5.2 h, y el más largo mide 1247 km. La misma ruta se usa para el tiempo, la distancia y los peajes, de modo que el costo de cada tramo corresponde a un único viaje real.
+
+La primera versión del código usaba OSRM (API Table). Al comparar ambas fuentes, la diferencia relativa de distancia tiene mediana 1.7 %, percentil 95 de 16.5 % y máximo de 50 %. Medir los peajes sobre una ruta y tomar el tiempo de otra habría dado costos que no corresponden a ningún viaje, así que se descartó mezclarlas. Los datos de OSRM se conservan en `data/osrm/` solo para comparar.
+
+**Peajes.** Se identificaron las autopistas de peaje que recorre cada ruta midiendo, arista por arista, los kilómetros sobre vías marcadas `toll=yes` en OpenStreetMap. Cada vía se asignó a su grupo tarifario y se calculó una tarifa por kilómetro a partir del peaje oficial de 2026 de un recorrido de referencia, medido con el mismo motor de rutas:
+
+$$
+\text{tarifa}_a = \frac{\text{peaje oficial del recorrido de referencia}}{\text{km de ese recorrido}}, \qquad p_{ij} = \sum_{a} \text{km}_{ij,a}\,\text{tarifa}_a + \text{cuotas fijas}
+$$
+
+La Tabla 2 muestra las tarifas resultantes. Los túneles de Artxanda tienen cuota fija: 1.55 EUR por paso.
+
+**Tabla 2.** Tarifas por kilómetro de las autopistas de peaje que usan las rutas, vehículo ligero, 2026. Fuente: PDF de tarifas del Ministerio de Transportes y Movilidad Sostenible, SEITT, Bidegi, Interbiak y Audenasa (URL por fila en `data/valhalla/peajes_2026.csv`).
+
+| Autopista | Peaje de referencia (EUR) | km de referencia | EUR/km |
+| --- | --- | --- | --- |
+| AP-6 Villalba – Adanero | 15.70 | 57.46 | 0.273 |
+| AP-51 Villacastín – Ávila | 1.75 | 23.46 | 0.075 |
+| AP-61 San Rafael – Segovia | 3.05 | 25.59 | 0.119 |
+| AP-9 A Coruña – Pontevedra | 16.35 | 111.60 | 0.147 |
+| AP-53 Santiago – Alto de Santo Domingo | 7.25 | 40.36 | 0.180 |
+| AP-66 Campomanes – León | 16.20 | 77.20 | 0.210 |
+| AP-71 León – Astorga | 6.20 | 35.03 | 0.177 |
+| AP-68 Bilbao – Zaragoza | 39.90 | 291.10 | 0.137 |
+| AP-15 Pamplona – Tudela | 11.40 | 69.52 | 0.164 |
+| AP-8/AP-1 Bilbao – Donostia | 13.81 | 75.96 | 0.182 |
+| R-2 | 5.20 | 57.09 | 0.091 |
+| R-3 | 3.40 | 25.35 | 0.134 |
+| R-4 | 6.15 | 51.01 | 0.121 |
+| R-5 | 3.65 | 20.53 | 0.178 |
+| AP-36 Corral de Almaguer – San Clemente | 14.15 | 118.69 | 0.119 |
+| AP-7 Málaga – Guadiaro | 12.00 | 71.45 | 0.168 |
+| C-32 Garraf y Cubelles | 13.45 | 32.73 | 0.411 |
+
+De los 1081 pares de ciudades, 607 (1214 pares dirigidos) pasan por al menos una autopista de peaje. El peaje medio de esos tramos es de 17.09 EUR, y el máximo es de 52.20 EUR (Albacete – Oviedo).
+
+Por ejemplo, de A Coruña a Albacete la ruta recorre 118.69 km de AP-36, 56.41 km de AP-6 y 50.69 km de R-4, y el peaje suma 14.15 + 15.41 + 6.11 = 35.67 EUR.
+
+**Vehículo y combustible.** Dacia Sandero TCe 90 de gasolina (67 kW), con consumo WLTP combinado de 5.3 L/100 km (ADAC Autokatalog). El precio de la gasolina 95 E5 es de 1.7961 EUR/L: la media simple de 10 238 estaciones de la España peninsular, según el Geoportal de Gasolineras del MITECO, con dato del 13/10/2026 a las 22:02.
 
 **Estado de cada dato.**
 
-| Dato | Fuente prevista | Estado |
+| Dato | Fuente | Estado |
 | --- | --- | --- |
-| Coordenadas de las 47 capitales | Fuente primaria (IGN, INE o ayuntamientos) | Las escribió la IA de memoria; solo pasan un control de cordura (rangos y 4 distancias desde Madrid con ±5 %) |
-| Distancias y tiempos | OSRM, API Table, perfil `driving` | Ubicado en data/distances.csv |
-| Peajes (2162 pares dirigidos) | Tarifas oficiales de cada concesionaria, clase 1 | **Pendiente:**  |
-| Vehículo y consumo | Ficha técnica del fabricante u homologación | Completo, vehiculo elegido Dacian Sanndero |
-| Precio del combustible | Fuente oficial con fecha | Fuente en experiment.json |
+| Coordenadas de las 47 capitales | Wikidata (P625) | Verificado; la versión anterior, escrita de memoria por la IA, difería como máximo 1.6 km |
+| Distancias y tiempos | Valhalla 3.9.1 sobre OpenStreetMap (FOSSGIS) | Completo, 1081 pares |
+| Peajes | Tarifas oficiales 2026 prorrateadas por km sobre la ruta de Valhalla | Completo, 2162 pares dirigidos; es una estimación, ver limitaciones |
+| Vehículo y consumo | ADAC Autokatalog | Completo |
+| Precio del combustible | Geoportal de Gasolineras (MITECO), 13/10/2026 | Completo |
 
-**Método para los peajes: decisión pendiente del equipo.** Identificar los tramos de peaje de cada itinerario y sumar las tarifas oficiales exige decidir cuánto del trabajo se hace a mano y cuánto se aproxima. Se exploró detectar los tramos automáticamente con OSRM y OpenStreetMap, pero esa vía se descartó y su código se retiró del repositorio (ver la cacería de la alucinación). Cualquier método que se adopte debe declarar si el importe es oficial o una estimación.
+**Limitaciones de los peajes.**
 
-**Algoritmos y parámetros.** ACO y AG descritos en la fundamentación. Con 3 corridas, ACO de 150 iteraciones y AG de 200 individuos × 400 generaciones, la configuración de ejemplo dura cerca de un minuto; son valores de demostración, no ajustados, y hay que justificar los definitivos. La semilla base es 42 y la corrida i usa 42 + i.
+- Prorratear por kilómetro es una aproximación: en la realidad se paga por tramo o por caseta.
+- Se supone el mismo peaje en los dos sentidos.
+- No se modelan descuentos por recurrencia ni tarifas nocturnas.
+- La concesión de la AP-68 termina el 10/11/2026; después de esa fecha su peaje es 0.
+- Hay tres tarifas con reservas:
+  - AP-15: la columna de la tabla de Audenasa se interpretó como vehículos ligeros.
+  - C-32: tarifa de una fuente secundaria.
+  - R-4 y AP-36: el PDF se titula 2026 pero dice "en vigor desde el 1 de enero de 2025".
 
-**Barrido del valor de la hora.** Para h en una malla (por defecto 0, 10, 20, 40, 80, 160 EUR/h) se ejecutan los algoritmos, se reúnen todas las rutas halladas y se calcula la envolvente inferior de sus rectas C(h) = h·T + M. Los vértices son los valores de h donde cambia la mejor ruta conocida.
+**Algoritmos y parámetros.** ACO y AG como se describen en la fundamentación, con la configuración de `config/experiment.json`:
+
+- ACO: 47 hormigas, 150 iteraciones, α = 1, β = 3, ρ = 0.35.
+- AG: 200 individuos, 400 generaciones, cruce 0.9, mutación 0.15.
+
+Se hicieron 10 corridas por algoritmo con valor de la hora h = 20 EUR/h. La semilla base es 42 y la corrida i usa 42 + i.
+
+**Barrido del valor de la hora.** Para h = 0, 10, 20, 40, 80 y 160 EUR/h se ejecutaron 3 corridas de ACO, se reunieron todas las rutas halladas y se calculó la envolvente inferior de sus rectas C(h) = h·T + M.
 
 ## Parte 2: resultados
 
-**[PENDIENTE: no hay resultados citables hasta cargar los datos reales.]** El código se probó solo con datos sintéticos inventados (`python main.py run --demo`), que no se pueden citar. Cuando existan los datos reales, esta sección debe contener lo siguiente, que `main.py run` y `main.py sweep` ya producen:
+El ACO encontró la ruta más barata y fue mucho más estable que el AG. La Tabla 3 resume las 10 corridas de cada algoritmo con h = 20 EUR/h.
 
-- **Comparación ACO y AG:** tabla con mejor, media, desviación, peor costo y segundos por algoritmo (`results/comparison.csv`), con el número de corridas y la semilla base 42.
-- **Mejor ruta:** el orden de las 47 capitales y el desglose en tiempo, peajes y combustible (`best_route.json`), con el mapa (`best_route.png`) y el GIF de su evolución (`evolution.gif`).
-- **Barrido del valor de la hora:** los valores de h en que cambia la mejor ruta conocida (`hourly_sweep_envelope.csv`) y la figura `hourly_sweep.png`. Esos cambios son una cota superior de los cambios reales, porque los heurísticos no garantizan optimalidad; la columna `gap_vs_best_known_eur` mide cuánto se alejó cada corrida de la mejor ruta conocida.
-- **Análisis:** cuál algoritmo es mejor y con qué parámetros, qué parte del costo pesa más y qué cambia en la ruta cuando sube h (más autopistas de peaje, menos tiempo).
+**Tabla 3.** Costo total del recorrido (EUR) en 10 corridas por algoritmo, h = 20 EUR/h, semillas 42 a 51.
 
-**Observación preliminar con datos sintéticos (no citable).** Con los parámetros de ejemplo, el ACO obtuvo costos menores que el AG (alrededor de 2314 frente a 2630 en la instancia sintética), lo que indica que el AG necesita ajuste de población, generaciones y operadores antes de la comparación definitiva.
+| Algoritmo | Mejor | Media | Desv. est. | Peor | Segundos por corrida |
+| --- | --- | --- | --- | --- | --- |
+| ACO | 2308.61 | 2401.35 | 35.26 | 2433.26 | 17.3 |
+| AG | 2465.36 | 2845.44 | 172.54 | 3092.52 | 10.4 |
+
+La mejor ruta del ACO (semilla 44) recorre 6941 km en 79.3 h. Su costo se reparte así:
+
+- tiempo: 1586.12 EUR (68.7 %);
+- combustible: 660.74 EUR (28.6 %);
+- peajes: 61.74 EUR (2.7 %).
+
+La mejor del AG (semilla 43) es 157 EUR más cara: recorre 587 km más y tarda 5.2 h más.
+
+**Mejor recorrido (ACO):** A Coruña → Lugo → Ourense → Pontevedra → Oviedo → Santander → Bilbao → Vitoria-Gasteiz → San Sebastián → Pamplona → Logroño → Soria → Guadalajara → Madrid → Toledo → Ciudad Real → Albacete → Cuenca → Teruel → Zaragoza → Huesca → Lleida → Tarragona → Barcelona → Girona → Castellón de la Plana → Valencia → Alicante → Murcia → Almería → Málaga → Granada → Jaén → Córdoba → Sevilla → Huelva → Cádiz → Badajoz → Cáceres → Salamanca → Ávila → Segovia → Zamora → Valladolid → Palencia → Burgos → León → A Coruña.
+
+![Mejor ruta ACO]({{ '/assets/img/tsp_mejor_ruta_aco.png' | relative_url }})
+
+**Figura 3.** Mejor recorrido del ACO sobre las provincias peninsulares (h = 20 EUR/h, semilla 44). Fuente: elaboración propia; polígonos de provincias de click_that_hood (Code for America).
+
+![Mejor ruta AG]({{ '/assets/img/tsp_mejor_ruta_ag.png' | relative_url }})
+
+**Figura 4.** Mejor recorrido del AG (h = 20 EUR/h, semilla 43). Fuente: elaboración propia.
+
+![Evolución del ACO]({{ '/assets/gif/tsp_aco_evolucion.gif' | relative_url }})
+
+**Animación 4.** Evolución de la mejor ruta del ACO a lo largo de las iteraciones. Se regenera con `python main.py run`.
+
+**Barrido del valor de la hora.** Las 18 rutas distintas que se encontraron en el barrido forman una envolvente inferior de solo dos tramos (Tabla 4 y Figura 5). La mejor ruta conocida cambia una sola vez, en h ≈ 8.56 EUR/h:
+
+- **Por debajo de ese valor** conviene una ruta 1.3 h más lenta pero 71 km más corta y con 17.76 EUR menos de peajes.
+- **Por encima** conviene la ruta más rápida, que es la de la Figura 3.
+
+**Tabla 4.** Envolvente inferior del barrido del valor de la hora (ACO, 3 corridas por valor). Fuente: `results/hourly_sweep_envelope.csv`.
+
+| Intervalo de h (EUR/h) | Horas | km | Peajes (EUR) | Hallada en |
+| --- | --- | --- | --- | --- |
+| [0, 8.56) | 80.59 | 7012 | 43.98 | h = 160 |
+| [8.56, ∞) | 79.31 | 6941 | 61.74 | h = 20 |
+
+![Barrido del valor de la hora]({{ '/assets/img/tsp_barrido_valor_hora.png' | relative_url }})
+
+**Figura 5.** Horas totales y gasto en peajes más combustible de la mejor corrida para cada valor de la hora, y de la mejor ruta conocida (línea negra). Fuente: elaboración propia.
+
+## Parte 2: discusión
+
+**El ACO superó al AG en costo y en estabilidad.** Su desviación estándar fue 5 veces menor. La visibilidad η = 1/c guía a cada hormiga hacia los tramos baratos desde la primera iteración. El AG, en cambio, parte de permutaciones aleatorias, y su mutación por intercambio de dos ciudades cambia cuatro aristas a la vez, casi siempre empeorando la ruta. Aun así, la mejor ruta del ACO tiene cruces visibles en la Figura 3 (por ejemplo, Girona – Castellón). Un recorrido con cruces no es óptimo: deshacer el cruce con un movimiento 2-opt lo acorta. Por eso ninguno de los dos resultados es el óptimo.
+
+**El ruido de los heurísticos pesa más que el efecto del valor de la hora.** 8 de las 10 corridas del ACO terminaron entre 2381 y 2433 EUR, lo que es consistente con el estancamiento de la feromona descrito en la cacería de la alucinación. En el barrido, la mejor corrida se alejó hasta 194.73 EUR de la mejor ruta conocida para el mismo h, y la ruta que resultó mejor para h < 8.56 se encontró corriendo con h = 160. Por eso el umbral de 8.56 EUR/h es una cota de lo que encontraron los heurísticos, no el umbral exacto del óptimo.
+
+**El tiempo domina el costo.** Con h = 20 EUR/h el tiempo representa el 69 % del total y los peajes menos del 3 %. Esto explica por qué la ruta cambia tan poco al subir h: las rutas buenas ya son casi las más rápidas.
+
+**Limitación del modelo: una sola ruta por par.** Cada tramo usa siempre la ruta más rápida, pague o no peaje, así que el valor de la hora solo puede cambiar el orden de las ciudades, no la decisión de pagar el peaje. Los datos de Valhalla incluyen también la ruta que evita peajes (`data/valhalla/rutas_valhalla.csv`). Por ejemplo, para A Coruña → Albacete con h = 20 EUR/h:
+
+- ruta con peaje (7.92 h, 855.6 km): 275.55 EUR;
+- ruta libre (8.33 h, 863.1 km): 248.78 EUR.
+
+El peaje solo compensa a partir de h ≈ 85 EUR/h. Un modelo con costo mín(ruta con peaje, ruta libre) por tramo respondería mejor a la pregunta del valor de la hora; queda como trabajo futuro.
 
 ## Reproducibilidad
 
@@ -275,25 +380,25 @@ Todo el trabajo se regenera desde un repositorio con un solo entorno para las do
 - **Entorno:** Python 3.11 o superior (probado con 3.13/3.14) y `requirements.txt` con versiones fijas: numpy 2.5.3, pandas 3.0.5, matplotlib 3.11.2, pillow 12.3.0 y requests 2.34.2. Las versiones instaladas coinciden con las fijadas; la instalación con `pip install -r requirements.txt` todavía no se probó en una máquina limpia.
 - **Semillas:** parte 1, base 12345; parte 2, base 42; la corrida i usa base + i. Mismas semillas, mismos resultados (hay una prueba para la parte 2 y el resultado de la parte 1 no cambió entre versiones de las bibliotecas).
 - **Parámetros:** se cambian por línea de comandos o por un JSON, sin editar el código (`--param método.nombre=valor`).
-- **Datos:** una vez generados los CSV de `parte2_tsp/data/`, la ejecución no usa Internet.
+- **Datos:** los CSV de `Optimizacion/Optimizacion_combinatoria/data/` ya están en el repositorio; la ejecución no usa Internet. Se regeneran desde los datos originales con `python importar_valhalla.py` y `python build_data.py --skip-osrm ...`.
 
 Comandos, ejecutados desde la carpeta de cada parte:
 
 ```bash
 # Parte 1
-cd parte1_numerica
+cd Optimizacion/Optimizacion_heuristica
 python main.py check                 # gradientes analíticos vs. diferencias finitas
 python main.py compare               # 30 corridas, 4 métodos, 2 funciones, 2D y 3D (~17 s)
 python main.py curves                # PNG de convergencia
 python main.py animate --method pso --function rastrigin --seed 3   # GIF (~25 s)
 
 # Parte 2
-cd ../parte2_tsp
-python build_data.py                 # matrices de OSRM (una vez, con Internet)
-python main.py validate
-python main.py run
-python main.py sweep --hourly-values 0 10 20 40 80 160
-python -m unittest discover -s tests # 35 pruebas (~4 s)
+cd ../Optimizacion_combinatoria
+python main.py validate                     # revisa datos y matriz de costos
+python main.py run --runs 10                # Tabla 3, Figuras 3 y 4, Animación 4 (~6 min)
+python main.py run --runs 1 --param aco.iterations=80 --param genetic_algorithm.generations=200   # demostración (< 2 min)
+python main.py sweep --runs 3               # Tabla 4 y Figura 5 (~4 min)
+python -m unittest discover -s tests        # 35 pruebas
 ```
 
 ## Uso de inteligencia artificial
@@ -305,6 +410,9 @@ python -m unittest discover -s tests # 35 pruebas (~4 s)
 | Completar y corregir comentarios | La gran parte de comentarios | Se verificaron la mayoria de comentarios |
 | Generar archivos complementarios de la parte 2 | build_data.py (a partir de OSRM), main.py, tsp_data.py, sources.md, requirements.txt y README.md | Se verificaron los datos extraidos |
 | Generar reporte en markdown a partir de documento y complementos | Produjo la gran mayoria del texto de este documento y los otros archivos en docs | Se valido en la pagina del blog |
+| Construir los datos reales de la parte 2 (rutas, peajes, combustible) | Consultas a Valhalla y a la API del MITECO, tabla de tarifas `peajes_2026.csv` con URL oficial por fila, `build_rutas.py` y `FUENTES.md` | Se abrieron los PDF oficiales de cada tarifa; se calculó a mano el peaje de A Coruña – Albacete (35.67 EUR) y coincidió con el CSV |
+| Revisar el código de la parte 2 e integrar los datos | Diagnóstico de lo que faltaba, `importar_valhalla.py`, `preparar_mapa.py`, `sources.md` y README actualizados | `python main.py validate`, las 35 pruebas y una corrida completa; se compararon las distancias de OSRM y Valhalla |
+| Redactar las secciones de datos, resultados y discusión de la parte 2 | Texto de este reporte a partir de los CSV de `results/` | Cada cifra se comprobó contra `comparison.csv`, `best_route.json` y `hourly_sweep_envelope.csv` |
 
 
 ## Cacería de la alucinación
@@ -318,21 +426,31 @@ Se registran los errores y suposiciones falsas del asistente que se detectaron a
 | 3 | Las columnas `ciudad/lon/lat` y `ruta/costo` del script de visualización original eran compatibles con el resto | El script de datos usaba `city/longitude/latitude` y los algoritmos devuelven `route/cost/generation` | Se unificaron los nombres en la versión en inglés |
 | 4 | OSRM público expone la clase `toll` en sus rutas, así que detectar peajes era leer ese campo | El equipo ejecutó la detección y el servidor no devolvió ninguna clase; la salvaguarda del código se negó a seguir en vez de marcar toda ruta como gratuita | Se probó una segunda versión (cruzar la geometría de la ruta con las vías de OpenStreetMap); tampoco se pudo descargar la geometría (504 de Overpass). Se retiró todo el codigo |
 | 5 | Un cambio de nombres de módulos y variables en la parte 1 no afectaba al resultado | Colisiones de nombres de módulos (`functions`) y claves de diccionario que también se habían renombrado | Se corrigieron las importaciones y se comprobó que los resultados eran idénticos|
+| 6 | `build_data.py` (generado por IA) usaba por defecto 6.0 L/100 km y 1.60 EUR/L, mientras que el vehículo de `config/experiment.json` consume 5.3 L/100 km a 1.7961 EUR/L | Al comparar `data/cost_matrix.csv` con la matriz que construye `main.py`: los valores por defecto del script no son los del vehículo, así que la matriz guardada no coincidía con la usada | Se pasan los valores de forma explícita (`--consumption 5.3 --fuel-price 1.7961`) y el comando quedó documentado en el README |
+| 7 | El README y `sources.md` generados por IA citaban archivos y carpetas que no existen: `genetic_algorithm.py`, `tsp_visualization.py`, `toll_tools.py` y `parte2_tsp/` | Al seguir las instrucciones del README en el repositorio clonado, los comandos y referencias no encontraban los archivos (los reales son `algoritmo_genetico.py` y `tsp_visualizacion.py`) | Se corrigieron los nombres en el README y se retiró la descripción de `toll_tools.py` de `sources.md` |
+| 8 | Las coordenadas de las 47 capitales en `cities.csv` las escribió la IA de memoria, sin fuente | `sources.md` lo declaraba; un dato sin fuente no se puede citar | Se reemplazaron por las de Wikidata (P625). La diferencia máxima fue de 1.6 km (A Coruña): eran aproximadas, no inventadas, pero no eran verificables |
 
 
 ## Referencias
 
+- ADAC. (s. f.). *Dacia Sandero (3. Generation) TCe 90* [Ficha técnica, ADAC Autokatalog]. Recuperado el 13 de octubre de 2026 de https://www.adac.de/rund-ums-fahrzeug/autokatalog/marken-modelle/dacia/sandero/3generation/334757
 - Armijo, L. (1966). Minimization of functions having Lipschitz continuous first partial derivatives. *Pacific Journal of Mathematics, 16*(1), 1–3.
 - Clerc, M., & Kennedy, J. (2002). The particle swarm: Explosion, stability, and convergence in a multidimensional complex space. *IEEE Transactions on Evolutionary Computation, 6*(1), 58–73.
+- Code for America. (s. f.). *click_that_hood* [Repositorio de GitHub]. Recuperado el 13 de octubre de 2026 de https://github.com/codeforamerica/click_that_hood
 - Davis, L. (1985). Applying adaptive algorithms to epistatic domains. En *Proceedings of the 9th International Joint Conference on Artificial Intelligence* (Vol. 1, pp. 162–164).
 - Dorigo, M., Maniezzo, V., & Colorni, A. (1996). Ant system: Optimization by a colony of cooperating agents. *IEEE Transactions on Systems, Man, and Cybernetics, Part B, 26*(1), 29–41.
 - Eshelman, L. J., & Schaffer, J. D. (1993). Real-coded genetic algorithms and interval-schemata. En L. D. Whitley (Ed.), *Foundations of genetic algorithms 2* (pp. 187–202). Morgan Kaufmann.
 - Holland, J. H. (1975). *Adaptation in natural and artificial systems*. University of Michigan Press.
 - Kennedy, J., & Eberhart, R. (1995). Particle swarm optimization. En *Proceedings of ICNN'95: International Conference on Neural Networks* (Vol. 4, pp. 1942–1948). IEEE.
 - Luxen, D., & Vetter, C. (2011). Real-time routing with OpenStreetMap data. En *Proceedings of the 19th ACM SIGSPATIAL International Conference on Advances in Geographic Information Systems* (pp. 513–516). ACM.
+- Ministerio de Transportes y Movilidad Sostenible. (2026). *Peajes vigentes desde el 01/01/2026* [Tarifas por autopista]. Recuperado el 13 de octubre de 2026 de https://www.transportes.gob.es
+- Ministerio para la Transición Ecológica y el Reto Demográfico. (2026). *Precios de carburantes en estaciones de servicio terrestres* [API REST, Geoportal de Gasolineras]. Recuperado el 13 de octubre de 2026 de https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/
 - Nocedal, J., & Wright, S. J. (2006). *Numerical optimization* (2.ª ed.). Springer.
+- OpenStreetMap contributors. (2026). *OpenStreetMap* [Base de datos geográfica]. https://www.openstreetmap.org
 - Project OSRM. (s. f.). *OSRM API documentation*. https://project-osrm.org/docs/v5.24.0/api/.
 - Rosenbrock, H. H. (1960). An automatic method for finding the greatest or least value of a function. *The Computer Journal, 3*(3).
 - Storn, R., & Price, K. (1997). Differential evolution: A simple and efficient heuristic for global optimization over continuous spaces. *Journal of Global Optimization, 11*(4).
 - Stützle, T., & Hoos, H. H. (2000). MAX–MIN ant system. *Future Generation Computer Systems, 16*(8).
 - Törn, A., & Žilinskas, A. (1989). *Global optimization* (Lecture Notes in Computer Science, Vol. 350).
+- Valhalla contributors. (2025). *Valhalla* (Versión 3.9.1) [Software]. https://github.com/valhalla/valhalla
+- Wikidata. (2026). *Wikidata Query Service*. Recuperado el 13 de octubre de 2026 de https://query.wikidata.org
