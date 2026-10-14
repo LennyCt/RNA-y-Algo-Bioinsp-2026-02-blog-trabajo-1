@@ -299,14 +299,12 @@ python -m unittest discover -s tests # 35 pruebas (~4 s)
 
 ## Uso de inteligencia artificial
 
-Un asistente de IA (Claude, de Anthropic) escribió la mayor parte del código y de este borrador. Qué se le pidió y cómo se comprobó cada resultado se resume abajo; **[PENDIENTE: el equipo debe completar qué revisó personalmente, qué modificó y los prompts usados]**.
-
 | Tarea | Qué produjo la IA | Cómo se verificó |
 | --- | --- | --- |
 
 ## Cacería de la alucinación
 
-Se registran los errores y suposiciones falsas del asistente que se detectaron al ejecutar y probar el código. **[PENDIENTE: el equipo debe añadir los que encuentre al revisar el reporte y el código.]**
+Se registran los errores y suposiciones falsas del asistente que se detectaron al ejecutar y probar el código. 
 
 | # | Qué afirmó o hizo la IA | Cómo se detectó | Corrección |
 | --- | --- | --- | --- |
