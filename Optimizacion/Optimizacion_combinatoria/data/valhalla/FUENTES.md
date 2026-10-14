@@ -25,3 +25,25 @@ Gasolina 95 E5, media simple de 10 238 estaciones de la España peninsular (se e
 Baleares, Las Palmas, Santa Cruz de Tenerife, Ceuta y Melilla): **1,7961 €/L**
 (mediana 1,815; percentil 10: 1,679; percentil 90: 1,889).
 Gasóleo A, misma muestra: 1,8930 €/L (10 627 estaciones).
+
+## Advertencias conocidas
+
+* **AP-68 Bilbao–Zaragoza**: la concesión termina el **10/11/2026** (Ministerio de Transportes,
+  página "Peajes dependientes de la AGE"). A la fecha de consulta sigue siendo de peaje.
+  Para simular la situación posterior: `--set tariff_overrides.AP-68=0`.
+* **AP-7 Circunvalación de Alicante**: liberada por Acuerdo del Consejo de Ministros de 9/12/2025.
+* Liberadas en años anteriores (no se cobran): AP-1 Burgos–Armiñón (30/11/2018), AP-4 y AP-7
+  Tarragona–Alicante (31/12/2019), AP-7 Tarragona–La Jonquera y AP-2 (31/08/2021).
+* Las tarifas usadas son las **generales de un vehículo ligero sin descuentos** (pago en efectivo
+  o tarjeta en las autopistas de SEITT, y el nivel "normal"/"diurno" donde hay franjas horarias o
+  niveles especiales). No se modelan bonificaciones por recurrencia ni tarifas nocturnas.
+* Autopistas de peaje que **ninguna** ruta más rápida entre capitales usa (y por eso no tienen
+  fila en `peajes_2026.csv`): AP-41 Madrid–Toledo, AP-46, AP-7 Alicante–Cartagena,
+  AP-7 Cartagena–Vera y M-12 (también C-16 y otras autopistas autonómicas no usadas).
+  Las tarifas 2026 de las cuatro primeras se consultaron en las mismas fuentes oficiales.
+* Tarifa de la C-32 (Garraf y Cubelles): fuente secundaria (Diari Més, que cita la resolución
+  del DOGC); no se consultó el DOGC directamente.
+* Rutas por Portugal (Badajoz–Pontevedra, Huelva–Pontevedra): no se modelan peajes portugueses;
+  para esos pares solo se usa la ruta sin peajes por España.
+* `raw/peajes_aristas.txt` indica el método de medición de cada par: `walk` (arista exacta),
+  `snap` (ajuste al mapa por trozos) o `maniobras` (respaldo para rutas de más de 1 000 km).
