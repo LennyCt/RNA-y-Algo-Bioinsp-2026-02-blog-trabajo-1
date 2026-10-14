@@ -1,0 +1,9 @@
+# Configuración de GitHub Pages (Jekyll). Editen title y description.
+title: "Optimización numérica, metaheurística y combinatoria"
+description: "Reporte técnico del Trabajo 1: descenso por gradiente, AG, PSO, DE y TSP con ACO"
+lang: es
+markdown: kramdown
+kramdown:
+  input: GFM
+  math_engine: null      # deja las fórmulas $$...$$ tal cual para que las dibuje MathJax
+  syntax_highlighter: rouge
