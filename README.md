@@ -40,6 +40,8 @@ python -m unittest discover -s tests
 
 Detalles: [`Optimizacion_heuristica/README.md`](Optimizacion_heuristica/README.md) y [`Optimizacion_combinatoria/README.md`](Optimizacion_combinatoria/README.md).
 
+Link del blog: https://lennyct.github.io/RNA-y-Algo-Bioinsp_Trabajo1/
+
 ## Reproducibilidad
 
 - Semillas fijas y documentadas: parte 1, base 12345; parte 2, base 42 (`Optimizacion_combinatoria/config/experiment.json`).
