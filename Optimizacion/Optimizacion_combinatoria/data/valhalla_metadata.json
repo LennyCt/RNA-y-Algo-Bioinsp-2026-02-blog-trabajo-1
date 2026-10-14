@@ -1,0 +1,9 @@
+{
+  "source": "Valhalla /route sobre OpenStreetMap",
+  "retrieved_on": "2026-10-13",
+  "units": {
+    "distances.csv": "km",
+    "travel_times.csv": "h"
+  },
+  "note": "Ruta más rápida con peajes permitidos; promedio de ida y vuelta."
+}

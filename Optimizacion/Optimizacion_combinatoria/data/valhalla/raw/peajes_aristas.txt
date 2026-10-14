@@ -1,0 +1,636 @@
+# Km recorridos en cada vía marcada como peaje en OpenStreetMap, ruta i->j más rápida con peajes (Valhalla use_tolls=1).
+# Formato: i-j|vía:km;vía:km|método.  Método: walk = trace_attributes edge_walk (arista exacta);
+# snap = trace_attributes map_snap por trozos de 180 km; maniobras = respaldo con las instrucciones de la ruta
+# (solo rutas >1000 km, nombres de autopista explícitos; menos preciso). Consulta: 2026-10-13.
+0-1|AP-9:7.79;AP-9M:2.55;AP-6:56.41;R-4:50.69;AP-36:118.69|snap
+0-2|AP-9:7.79;AP-9M:2.55;AP-6:56.41;R-4:50.69;AP-36:118.69|snap
+0-3|AP-9:13.36;AP-9M:2.55;AP-6:86.70;R-4:273.42|maniobras
+0-4|AP-9:7.79;AP-9M:2.55|snap
+0-5|AP-9:7.79;AP-9M:2.55|snap
+0-6|AP-9:13.36;AP-9M:2.55;AP-71:37.72;AP-68:224.78|maniobras
+0-7|AP-9:7.79;AP-9M:2.55;(sin nombre):0.32;BI-626:1.92|snap
+0-8|AP-9:7.79;AP-9M:2.55;AP-71:34.34|snap
+0-9|AP-9:7.79;AP-9M:2.55|snap
+0-10|AP-9:13.36;AP-9M:2.55|maniobras
+0-11|AP-9:7.79;AP-9M:2.55;AP-6:56.41|snap
+0-12|AP-9:7.79;AP-9M:2.55;AP-6:56.41;R-4:52.94|snap
+0-13|AP-9:7.79;AP-9M:2.55;AP-6:56.41;R-4:52.94|snap
+0-14|AP-9:7.79;AP-9M:2.55;AP-6:56.41|snap
+0-15|AP-9:13.36;AP-9M:2.55;AP-71:37.72;AP-68:224.78|maniobras
+0-16|AP-9:7.79;AP-9M:2.55;AP-6:56.41;R-4:52.94|snap
+0-17|AP-9:7.79;AP-9M:2.55;AP-6:56.41;R-2:39.49;(sin nombre):0.79|snap
+0-18|AP-9:7.79;AP-9M:2.55|snap
+0-19|AP-9:7.79;AP-9M:2.55;AP-71:34.34;(sin nombre):1.79;AP-68:222.10|snap
+0-20|AP-9:7.79;AP-9M:2.55;AP-6:56.41;R-4:52.94|snap
+0-21|AP-9:7.79;AP-9M:2.55;AP-71:34.91|snap
+0-22|AP-9:7.79;AP-9M:2.55;AP-71:34.34;(sin nombre):1.79;AP-68:222.10|snap
+0-23|AP-9:7.79;AP-9M:2.55;AP-71:34.34;(sin nombre):2.79;AP-68:57.95|snap
+0-24|AP-9:7.79;AP-9M:2.55|snap
+0-25|AP-9:7.79;AP-9M:2.55;AP-6:56.41|snap
+0-26|AP-9:13.36;AP-9M:2.55;AP-6:86.70;R-4:273.42|maniobras
+0-27|AP-9:7.79;AP-9M:2.55;AP-6:56.41;R-4:50.69;AP-36:118.69|snap
+0-28|AP-9:57.84;AP-53:40.36|snap
+0-29|AP-9:7.79;AP-9M:2.55|snap
+0-30|AP-9:7.79;AP-9M:2.55;AP-71:34.34|snap
+0-31|AP-9:7.79;AP-9M:2.55;AP-71:34.34;AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|snap
+0-32|AP-9:111.60|snap
+0-33|AP-9:7.79;AP-9M:2.55|snap
+0-34|AP-9:7.79;AP-9M:2.55;AP-8:32.26;E 70*:2.41;AP-1:41.84|snap
+0-35|AP-9:7.79;AP-9M:2.55|snap
+0-36|AP-9:7.79;AP-9M:2.55|snap
+0-37|AP-9:7.79;AP-9M:2.55|snap
+0-38|AP-9:7.79;AP-9M:2.55;AP-71:34.34|snap
+0-39|AP-9:13.36;AP-9M:2.55;AP-71:37.72;AP-68:224.78|maniobras
+0-40|AP-9:7.79;AP-9M:2.55;AP-71:34.34;(sin nombre):1.79;AP-68:222.10|snap
+0-41|AP-9:7.79;AP-9M:2.55;AP-6:56.41|snap
+0-42|AP-9:7.79;AP-9M:2.55;AP-6:56.41|snap
+0-43|AP-9:7.79;AP-9M:2.55|snap
+0-44|AP-9:7.79;AP-9M:2.55;AP-71:34.34|snap
+0-45|AP-9:7.79;AP-9M:2.55|snap
+0-46|AP-9:7.79;AP-9M:2.55;AP-71:34.34;(sin nombre):1.79;AP-68:222.10|snap
+1-4|AP-36:118.72;R-4:51.01;AP-6:28.88;AP-51:23.16|walk
+1-6|C-32:32.50|walk
+1-7|R-3:14.75;(sin nombre):2.28;AP-68:68.21|walk
+1-8|R-3:14.75|walk
+1-17|R-3:14.75|walk
+1-21|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+1-23|R-3:14.75;(sin nombre):1.10;R-2:43.26|walk
+1-24|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+1-25||walk
+1-28|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+1-29|AP-36:118.72;R-4:51.01;AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+1-30|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+1-31|R-3:14.75;AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+1-32|AP-36:118.72;R-4:51.01;AP-6:57.46;AP-9:14.74|walk
+1-33|AP-36:118.72;R-4:51.01;AP-6:28.88;AP-51:23.16|walk
+1-34|R-3:14.75;E 05*:0.38;AP-1:86.01|walk
+1-35|R-3:14.75|walk
+1-36|AP-36:118.72;R-4:51.01;AP-6:9.10;AP-61:25.59|walk
+1-38|R-3:14.75;(sin nombre):1.10;R-2:43.26|walk
+1-43|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+1-44|R-3:14.75|walk
+1-45|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+2-4|AP-36:118.72;R-4:51.01;AP-6:28.88;AP-51:23.16|walk
+2-6|C-32:32.50|walk
+2-7|R-3:14.75;(sin nombre):2.28;AP-68:68.21|walk
+2-8|R-3:14.75|walk
+2-17|R-3:14.75|walk
+2-21|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+2-23|AP-68:152.55;(sin nombre):0.88|walk
+2-24|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+2-25||walk
+2-28|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+2-29|AP-36:118.72;R-4:51.01;AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+2-30|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+2-31|AP-68:82.64;AP-15:68.79;(sin nombre):0.01|walk
+2-32|AP-36:147.47;R-4:53.32;AP-6:135.92;AP-9:22.41|maniobras
+2-33|AP-36:118.72;R-4:51.01;AP-6:28.88;AP-51:23.16|walk
+2-34|AP-68:82.64;AP-15:81.18;(sin nombre):0.01|walk
+2-35|R-3:14.75|walk
+2-36|AP-36:118.72;R-4:51.01;AP-6:9.10;AP-61:25.59|walk
+2-38|R-3:14.75;(sin nombre):1.10;R-2:43.26|walk
+2-43|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+2-44|R-3:14.75|walk
+2-45|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+3-6|C-32:32.50|walk
+3-7|(sin nombre):2.28;AP-68:68.21|walk
+3-10||walk
+3-21|R-4:52.87;AP-6:57.46|walk
+3-23|(sin nombre):1.10;R-2:43.26|walk
+3-24|R-4:52.87;AP-6:135.92|maniobras
+3-28|R-4:52.87;AP-6:135.92|maniobras
+3-29|R-4:52.87;AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|snap
+3-30|R-4:52.87;AP-6:57.46|walk
+3-31|AP-68:82.64;AP-15:68.79;(sin nombre):0.01|walk
+3-32|R-4:52.87;AP-6:135.92;AP-9:22.41|maniobras
+3-33|R-4:52.87;AP-6:28.88;AP-51:23.16|walk
+3-34|AP-1:86.40|maniobras
+3-36|R-4:52.87;AP-6:9.10;AP-61:25.59|walk
+3-38|(sin nombre):1.10;R-2:43.26|walk
+3-43|R-4:52.87;AP-6:57.46|walk
+3-45|R-4:52.87;AP-6:57.46|walk
+4-6|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+4-7|(sin nombre):2.28;AP-68:68.21|walk
+4-11|AP-51:23.46;AP-6:27.57|walk
+4-14|AP-51:23.46;AP-6:27.57|walk
+4-15|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+4-17|AP-51:23.46;AP-6:27.57;R-2:39.49;(sin nombre):0.79|walk
+4-19|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+4-22|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+4-23|(sin nombre):2.79;AP-68:57.95|walk
+4-25|AP-51:23.46;AP-6:27.57|walk
+4-27|AP-51:23.46;AP-6:27.57;R-4:50.69;AP-36:118.69|walk
+4-29|AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+4-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+4-32|AP-9:14.74|walk
+4-34|(sin nombre):1.01;AP-1:80.95|walk
+4-36|AP-51:22.46;(sin nombre):0.63|walk
+4-38|AP-51:22.46;(sin nombre):0.63|walk
+4-39|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+4-40|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+4-42|AP-51:23.46;AP-6:27.57|walk
+4-46|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+5-6|R-5:20.28;R-2:130.98|maniobras
+5-7|(sin nombre):2.28;AP-68:68.21|walk
+5-14|R-5:20.28|walk
+5-15|R-5:20.28;R-2:130.98|maniobras
+5-17|R-5:20.28|walk
+5-19|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+5-22|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+5-23|(sin nombre):2.79;AP-68:57.95|walk
+5-29|AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+5-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+5-32|A 6*:139.77;(sin nombre):3.88;A 13:29.19;A 13*:9.67;A 10*:20.63;A 1*:253.38;A 3*:97.74;AP-9:14.74|walk
+5-34|(sin nombre):1.01;AP-1:80.95|walk
+5-36|AP-6:9.10;AP-61:25.59|walk
+5-38|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+5-39|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+5-40|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+5-46|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+6-7|AP-68:291.13|walk
+6-8|AP-68:203.23;(sin nombre):0.52|walk
+6-9|R-2:42.47;(sin nombre):0.65;R-5:20.14|walk
+6-10|C-32:48.50|maniobras
+6-11|C-32:32.73|walk
+6-12|C-32:32.73|walk
+6-13|C-32:32.73|walk
+6-14|C-32:32.73|walk
+6-16|C-32:32.73|walk
+6-18|C-32:48.50|maniobras
+6-20|C-32:32.73|walk
+6-21|AP-68:203.23;(sin nombre):0.52|walk
+6-23|AP-68:152.55;(sin nombre):0.88|walk
+6-24|AP-68:203.23;(sin nombre):0.52;AP-71:35.03|walk
+6-26|C-32:32.73|walk
+6-27|C-32:32.73|walk
+6-28|AP-68:203.23|maniobras
+6-29|AP-68:203.23;(sin nombre):0.71;AP-66:76.66;A-66*:0.43|walk
+6-30|AP-68:203.23;(sin nombre):0.52|walk
+6-31|AP-68:82.64;AP-15:68.79;(sin nombre):0.01|walk
+6-32|AP-68:203.23;AP-9:22.41|maniobras
+6-33|R-2:55.71;AP-6:28.88;AP-51:23.16|walk
+6-34|AP-68:82.64;AP-15:81.18;(sin nombre):0.01|walk
+6-35|AP-68:288.85;AP-8:14.25|walk
+6-36|R-2:55.71;AP-6:9.10;AP-61:25.59|walk
+6-37|C-32:32.73|snap
+6-39|C-32:32.73|walk
+6-40|C-32:32.73|walk
+6-41|R-2:42.47;(sin nombre):0.26|walk
+6-42|C-32:32.73|walk
+6-43|AP-68:203.23;(sin nombre):0.52|walk
+6-44|AP-68:218.06;(sin nombre):0.72|walk
+6-45|AP-68:203.23;(sin nombre):0.52|walk
+7-8|AP-68:68.10;(sin nombre):1.60|walk
+7-9|AP-68:68.10;(sin nombre):1.60|walk
+7-10|AP-68:68.10;(sin nombre):1.60|walk
+7-11|AP-68:291.10|walk
+7-12|AP-68:68.10;(sin nombre):1.60|walk
+7-13|AP-68:68.10;(sin nombre):1.60|walk
+7-14|AP-68:68.10;(sin nombre):1.60;R-3:15.22|walk
+7-15|AP-68:291.10|walk
+7-16|AP-68:68.10;(sin nombre):1.60|walk
+7-17|AP-68:68.10;(sin nombre):1.60|walk
+7-18|AP-68:68.10;(sin nombre):1.60|walk
+7-19|AP-68:291.10|walk
+7-20|AP-68:68.10;(sin nombre):1.60|walk
+7-21|AP-68:68.10;(sin nombre):1.60|walk
+7-22|AP-68:291.10|walk
+7-23|AP-68:126.95;(sin nombre):1.01|walk
+7-24||walk
+7-25|AP-68:68.10;(sin nombre):1.60|walk
+7-26|AP-68:68.10;(sin nombre):1.60|walk
+7-27|AP-68:68.10;(sin nombre):1.60;R-3:15.22|walk
+7-28|AP-68:68.10;(sin nombre):1.60|walk
+7-29||walk
+7-30|AP-68:68.10;(sin nombre):1.60|walk
+7-31|AP-68:35.60;(sin nombre):2.52;N-622:0.37;AP-15:11.63;PA-34*:0.01|walk
+7-32|AP-9M:2.42;AP-9:103.05|walk
+7-33|AP-68:68.10;(sin nombre):1.60|walk
+7-34|BI-626:1.99;(sin nombre):0.37;AP-8:31.34;E 70*:2.41;AP-1:41.84|walk
+7-35||walk
+7-36|AP-68:68.10;(sin nombre):1.60|walk
+7-37|AP-68:68.10;(sin nombre):1.60|walk
+7-38|AP-68:126.95;(sin nombre):1.01|walk
+7-39|AP-68:291.10|walk
+7-40|AP-68:291.10|walk
+7-41|AP-68:68.10;(sin nombre):1.60|walk
+7-42|AP-68:291.10|walk
+7-43|AP-68:68.10;(sin nombre):1.60|walk
+7-44|AP-68:35.60;(sin nombre):1.23;N-622:0.37|walk
+7-45|AP-68:68.10;(sin nombre):1.60|walk
+7-46|AP-68:291.10|walk
+8-11|(sin nombre):1.79;AP-68:222.10|walk
+8-14|R-3:15.22|walk
+8-15|(sin nombre):1.79;AP-68:222.10|walk
+8-19|(sin nombre):1.79;AP-68:222.10|walk
+8-22|(sin nombre):1.79;AP-68:222.10|walk
+8-23|(sin nombre):2.79;AP-68:57.95|walk
+8-24|AP-71:35.03|walk
+8-27|R-3:15.22|walk
+8-29|AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+8-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+8-32|AP-9:14.74|walk
+8-34|(sin nombre):1.01;AP-1:80.95|walk
+8-39|(sin nombre):1.79;AP-68:222.10|walk
+8-40|(sin nombre):1.79;AP-68:222.10|walk
+8-42|R-3:15.22|walk
+8-46|(sin nombre):1.79;AP-68:222.10|walk
+9-14|R-5:20.28|walk
+9-15|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+9-17|R-5:20.28|walk
+9-19|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+9-22|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+9-23|(sin nombre):2.79;AP-68:57.95|walk
+9-29|AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+9-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+9-32|AP-9:14.74|walk
+9-34|(sin nombre):1.01;AP-1:80.95|walk
+9-36|AP-6:9.10;AP-61:25.59|walk
+9-38|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+9-39|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+9-40|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+9-46|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+10-19|R-2:130.98|maniobras
+10-22|R-2:130.98|maniobras
+10-23|(sin nombre):2.79;AP-68:57.95|walk
+10-26|AP-7:71.45|walk
+10-29|AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+10-31|AP-15:15.43|maniobras
+10-32|AP-9:22.41|maniobras
+10-34|AP-1:81.60|maniobras
+10-36|AP-6:9.10;AP-61:25.59|walk
+10-38|(sin nombre):1.10;R-2:43.26|walk
+10-46|(sin nombre):1.10;R-2:43.26|walk
+11-21|AP-6:57.46|walk
+11-23|AP-68:152.55;(sin nombre):0.88|walk
+11-24|AP-6:57.46|walk
+11-25||walk
+11-28|AP-6:57.46|walk
+11-29|AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+11-30|AP-6:57.46|walk
+11-31|AP-68:82.64;AP-15:68.79;(sin nombre):0.01|walk
+11-32|AP-6:135.92;AP-9:22.41|maniobras
+11-33|AP-6:28.88;AP-51:23.16|walk
+11-34|AP-68:82.64;AP-15:81.18;(sin nombre):0.01|walk
+11-35|AP-68:288.85;AP-8:14.25|walk
+11-36|AP-6:9.10;AP-61:25.59|walk
+11-43|AP-6:57.46|walk
+11-44|AP-68:218.06;(sin nombre):0.72|walk
+11-45|AP-6:57.46|walk
+12-19|(sin nombre):1.10;R-2:43.26|walk
+12-21|R-4:52.87;AP-6:57.46|walk
+12-22|(sin nombre):1.10;R-2:43.26|walk
+12-23|(sin nombre):1.10;R-2:43.26|walk
+12-24|R-4:52.87;AP-6:57.46|walk
+12-28|R-4:52.87;AP-6:57.46|walk
+12-29|R-4:52.87;AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+12-30|R-4:52.87;AP-6:57.46|walk
+12-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+12-32|R-4:52.87;AP-6:57.46;AP-9:14.74|walk
+12-33|R-4:52.87;AP-6:28.88;AP-51:23.16|walk
+12-34|(sin nombre):1.01;AP-1:80.95|walk
+12-36|R-4:52.87;AP-6:9.10;AP-61:25.59|walk
+12-38|(sin nombre):1.10;R-2:43.26|walk
+12-43|R-4:52.87;AP-6:57.46|walk
+12-45|R-4:52.87;AP-6:57.46|walk
+12-46|(sin nombre):1.10;R-2:43.26|walk
+13-19|(sin nombre):1.10;R-2:43.26|walk
+13-21|R-4:52.87;AP-6:57.46|walk
+13-22|(sin nombre):1.10;R-2:43.26|walk
+13-23|(sin nombre):1.10;R-2:43.26|walk
+13-24|R-4:52.87;AP-6:57.46|walk
+13-28|R-4:52.87;AP-6:57.46|walk
+13-29|R-4:52.87;AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+13-30|R-4:52.87;AP-6:57.46|walk
+13-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+13-32|R-4:52.87;AP-6:57.46;AP-9:14.74|snap
+13-34|(sin nombre):1.01;AP-1:80.95|walk
+13-36|R-4:52.87;AP-6:9.10;AP-61:25.59|walk
+13-38|(sin nombre):1.10;R-2:43.26|walk
+13-43|R-4:52.87;AP-6:57.46|walk
+13-45|R-4:52.87;AP-6:57.46|walk
+13-46|(sin nombre):1.10;R-2:43.26|walk
+14-21|AP-6:57.46|walk
+14-24|AP-6:57.46|walk
+14-25||walk
+14-28|AP-6:57.46|walk
+14-29|AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+14-30|AP-6:57.46|walk
+14-31||walk
+14-32|AP-6:57.46;AP-9:14.74|walk
+14-33|AP-6:28.88;AP-51:23.16|walk
+14-34|R-3:14.75;E 05*:0.38;AP-1:86.01|walk
+14-35|R-3:14.75|walk
+14-36|AP-6:9.10;AP-61:25.59|walk
+14-41|R-4:4.75;(sin nombre):0.95|walk
+14-43|AP-6:57.46|walk
+14-44|R-3:14.75|walk
+14-45|AP-6:57.46|walk
+15-21|AP-68:203.23;(sin nombre):0.52|walk
+15-23|AP-68:152.55;(sin nombre):0.88|walk
+15-24|AP-68:203.23|maniobras
+15-28|AP-68:203.23|maniobras
+15-29|AP-68:203.23;(sin nombre):0.71;AP-66:76.66;A-66*:0.43|walk
+15-30|AP-68:203.23;(sin nombre):0.52|walk
+15-31|AP-68:82.64;AP-15:68.79;(sin nombre):0.01|walk
+15-32|AP-68:203.23;AP-9:22.41|maniobras
+15-33|R-2:55.71;AP-6:28.88;AP-51:23.16|walk
+15-34|AP-68:82.64;AP-15:81.18;(sin nombre):0.01|walk
+15-35|AP-68:288.85;AP-8:14.25|walk
+15-36|R-2:55.71;AP-6:9.10;AP-61:25.59|walk
+15-41|R-2:42.47;(sin nombre):0.26|walk
+15-43|AP-68:203.23;(sin nombre):0.52|walk
+15-44|AP-68:218.06;(sin nombre):0.72|walk
+15-45|AP-68:203.23;(sin nombre):0.52|walk
+16-19|(sin nombre):1.10;R-2:43.26|walk
+16-21|R-4:52.87;AP-6:57.46|walk
+16-22|(sin nombre):1.10;R-2:43.26|walk
+16-23|(sin nombre):1.10;R-2:43.26|walk
+16-24|R-4:52.87;AP-6:57.46|walk
+16-28|R-4:52.87;AP-6:57.46|walk
+16-29|R-4:52.87;AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+16-30|R-4:52.87;AP-6:57.46|walk
+16-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+16-32|R-4:52.87;AP-6:135.92;AP-9:22.41|maniobras
+16-33|R-4:52.87;AP-6:28.88;AP-51:23.16|walk
+16-34|(sin nombre):1.01;AP-1:80.95|walk
+16-36|R-4:52.87;AP-6:9.10;AP-61:25.59|walk
+16-38|(sin nombre):1.10;R-2:43.26|walk
+16-43|R-4:52.87;AP-6:57.46|walk
+16-45|R-4:52.87;AP-6:57.46|walk
+16-46|(sin nombre):1.10;R-2:43.26|walk
+17-18|(sin nombre):0.39;R-5:20.14|walk
+17-21|(sin nombre):1.27;R-2:27.95;AP-6:57.46|walk
+17-24|(sin nombre):1.27;R-2:27.95;AP-6:57.46|walk
+17-27|R-3:15.22|walk
+17-28|(sin nombre):1.27;R-2:27.95;AP-6:57.46|walk
+17-29|(sin nombre):1.46;R-2:27.95;AP-6:57.46;AP-66:76.66;A-66*:0.43|walk
+17-31||walk
+17-32|(sin nombre):1.27;R-2:27.95;AP-6:57.46;AP-9:14.74|walk
+17-33|(sin nombre):1.27;R-2:27.95;AP-6:28.88;AP-51:23.16|walk
+17-34|AP-15:74.70|walk
+17-36|(sin nombre):1.27;R-2:27.95;AP-6:9.10;AP-61:25.59|walk
+17-37|(sin nombre):0.39;R-5:20.14|walk
+17-42|R-3:15.22|walk
+17-43|(sin nombre):1.27;R-2:27.95;AP-6:57.46|walk
+17-45|(sin nombre):1.27;R-2:27.95;AP-6:57.46|walk
+18-19|R-5:20.28;(sin nombre):1.10;R-2:43.26|snap
+18-22|R-5:20.28;R-2:130.98|maniobras
+18-23|(sin nombre):2.79;AP-68:57.95|walk
+18-29|AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+18-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+18-32|E 01:0.38;A 2*:137.32;(sin nombre):4.22;A 13:29.19;A 13*:9.67;A 10*:20.63;A 1*:253.38;A 3*:97.74;AP-9:14.74|walk
+18-34|(sin nombre):1.01;AP-1:80.95|snap
+18-36|AP-6:9.10;AP-61:25.59|walk
+18-38|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+18-46|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+19-20|R-2:42.47;(sin nombre):0.26|walk
+19-21|AP-68:203.23;(sin nombre):0.52|walk
+19-23|AP-68:152.55;(sin nombre):0.88|walk
+19-24|AP-68:203.23;(sin nombre):0.52;AP-71:35.03|walk
+19-26|R-2:42.47;(sin nombre):0.26|walk
+19-28|AP-68:203.23;(sin nombre):0.52|walk
+19-29|AP-68:203.23;(sin nombre):0.71;AP-66:76.66;A-66*:0.43|walk
+19-30|AP-68:203.23;(sin nombre):0.52|walk
+19-32|AP-68:203.23;(sin nombre):0.52;AP-9:14.74|walk
+19-33|R-2:55.71;AP-6:28.88;AP-51:23.16|walk
+19-34|AP-15:12.40|walk
+19-35|AP-68:288.85;AP-8:14.25|walk
+19-36|R-2:55.71;AP-6:9.10;AP-61:25.59|walk
+19-37|R-2:42.47;(sin nombre):0.65;R-5:20.14|walk
+19-41|R-2:42.47;(sin nombre):0.26|walk
+19-43|AP-68:203.23;(sin nombre):0.52|walk
+19-44|AP-15:12.40|walk
+19-45|AP-68:203.23;(sin nombre):0.52|walk
+20-21|R-4:52.87;AP-6:57.46|walk
+20-22|(sin nombre):1.10;R-2:43.26|walk
+20-23|(sin nombre):1.10;R-2:43.26|walk
+20-24|R-4:52.87;AP-6:57.46|walk
+20-28|R-4:52.87;AP-6:57.46|walk
+20-29|R-4:52.87;AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+20-30|R-4:52.87;AP-6:57.46|walk
+20-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+20-32|R-4:52.87;AP-6:57.46;AP-9:14.74|walk
+20-33|R-4:52.87;AP-6:28.88;AP-51:23.16|walk
+20-34|(sin nombre):1.01;AP-1:80.95|walk
+20-36|R-4:52.87;AP-6:9.10;AP-61:25.59|walk
+20-38|(sin nombre):1.10;R-2:43.26|walk
+20-43|R-4:52.87;AP-6:57.46|walk
+20-45|R-4:52.87;AP-6:57.46|walk
+20-46|(sin nombre):1.10;R-2:43.26|walk
+21-22|(sin nombre):1.79;AP-68:222.10|walk
+21-23|(sin nombre):2.79;AP-68:57.95|walk
+21-24|AP-71:35.03|walk
+21-25|AP-6:56.41|walk
+21-26|AP-6:56.41;R-4:52.94|walk
+21-27|AP-6:56.41;R-4:50.69;AP-36:118.69|walk
+21-29|(sin nombre):0.80;AP-66:75.97;A-66*:0.43|walk
+21-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+21-32|AP-71:35.03;AP-9:53.76|walk
+21-34|(sin nombre):1.01;AP-1:80.95|walk
+21-39|(sin nombre):1.79;AP-68:222.10|walk
+21-40|(sin nombre):1.79;AP-68:222.10|walk
+21-41|AP-6:56.41|walk
+21-42|AP-6:56.41|walk
+21-46|(sin nombre):1.79;AP-68:222.10|walk
+22-23|AP-68:152.55;(sin nombre):0.88|walk
+22-24|AP-68:203.23;(sin nombre):0.52;AP-71:35.03|walk
+22-26|R-2:42.47;(sin nombre):0.26|walk
+22-28|AP-68:203.23;(sin nombre):0.52|walk
+22-29|AP-68:203.23;(sin nombre):0.71;AP-66:76.66;A-66*:0.43|walk
+22-30|AP-68:203.23;(sin nombre):0.52|walk
+22-31|AP-68:82.64;AP-15:68.79;(sin nombre):0.01|walk
+22-32|AP-68:203.23;(sin nombre):0.52;AP-9:14.74|snap
+22-33|R-2:55.71;AP-6:28.88;AP-51:23.16|walk
+22-34|AP-68:82.64;AP-15:81.18;(sin nombre):0.01|walk
+22-35|AP-68:288.85;AP-8:14.25|walk
+22-36|R-2:55.71;AP-6:9.10;AP-61:25.59|walk
+22-37|R-2:42.47;(sin nombre):0.65;R-5:20.14|snap
+22-41|R-2:42.47;(sin nombre):0.26|walk
+22-43|AP-68:203.23;(sin nombre):0.52|walk
+22-44|AP-68:218.06;(sin nombre):0.72|walk
+22-45|AP-68:203.23;(sin nombre):0.52|walk
+23-24|(sin nombre):1.17;AP-68:39.35;AP-71:35.03|walk
+23-26|R-2:42.47;(sin nombre):0.26|walk
+23-27|(sin nombre):1.49;AP-68:152.20|walk
+23-28|(sin nombre):1.17;AP-68:39.35|walk
+23-29|(sin nombre):1.36;AP-68:39.35;AP-66:76.66;A-66*:0.43|walk
+23-30|(sin nombre):1.17;AP-68:39.35|walk
+23-32|(sin nombre):1.17;AP-68:39.35;AP-9:14.74|walk
+23-33|(sin nombre):1.17;AP-68:39.35|walk
+23-34|AP-15:12.40|walk
+23-35|(sin nombre):0.66;AP-68:124.97;AP-8:14.25|walk
+23-36|(sin nombre):1.17;AP-68:39.35|walk
+23-37|(sin nombre):1.17;AP-68:39.35|walk
+23-39|(sin nombre):1.49;AP-68:152.20|walk
+23-40|(sin nombre):1.49;AP-68:152.20|walk
+23-41|R-2:42.47;(sin nombre):0.26|walk
+23-42|(sin nombre):1.49;AP-68:152.20|walk
+23-43|(sin nombre):1.17;AP-68:39.35|walk
+23-44|(sin nombre):1.38;AP-68:54.17|walk
+23-45|(sin nombre):1.17;AP-68:39.35|walk
+23-46|(sin nombre):1.49;AP-68:152.20|walk
+24-25|AP-6:56.41|walk
+24-26|AP-6:86.70;R-4:273.42|maniobras
+24-27|AP-6:56.41;R-4:50.69;AP-36:118.69|walk
+24-30|AP-71:34.34|walk
+24-31|AP-71:34.34;AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+24-32|AP-9:53.76|walk
+24-34|AP-71:34.34;(sin nombre):1.01;AP-1:80.95|walk
+24-38|AP-71:34.34|walk
+24-39|AP-71:34.34;(sin nombre):1.79;AP-68:222.10|walk
+24-40|AP-71:34.34;(sin nombre):1.79;AP-68:222.10|walk
+24-41|AP-6:56.41|walk
+24-42|AP-6:56.41|walk
+24-44|AP-71:34.34|walk
+24-46|AP-71:34.34;(sin nombre):1.79;AP-68:222.10|walk
+25-27|AP-36:118.69|walk
+25-28|AP-6:57.46|walk
+25-29|AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+25-30|AP-6:57.46|walk
+25-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+25-32|AP-6:57.46;AP-9:14.74|walk
+25-33|AP-6:28.88;AP-51:23.16|walk
+25-34|(sin nombre):1.01;AP-1:80.95|walk
+25-35|AP-6:57.46|walk
+25-36|AP-6:9.10;AP-61:25.59|walk
+25-42|R-3:25.35|walk
+25-43|AP-6:57.46|walk
+25-45|AP-6:57.46|walk
+26-28|R-4:52.87;AP-6:135.92|maniobras
+26-29|R-4:52.87;AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+26-30|R-4:52.87;AP-6:57.46|walk
+26-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+26-32|R-4:52.87;AP-6:135.92;AP-9:22.41|maniobras
+26-34|(sin nombre):1.01;AP-1:80.95|walk
+26-36|R-4:52.87;AP-6:9.10;AP-61:25.59|walk
+26-38|(sin nombre):1.10;R-2:43.26|walk
+26-43|R-4:52.87;AP-6:57.46|walk
+26-46|(sin nombre):1.10;R-2:43.26|walk
+27-28|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+27-29|AP-36:118.72;R-4:51.01;AP-6:57.46;AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+27-30|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+27-31|AP-68:82.64;AP-15:68.79;(sin nombre):0.01|walk
+27-32|AP-36:118.72;R-4:51.01;AP-6:57.46;AP-9:14.74|snap
+27-33|AP-36:118.72;R-4:51.01;AP-6:28.88;AP-51:23.16|walk
+27-34|AP-68:82.64;AP-15:81.18;(sin nombre):0.01|walk
+27-35|R-3:14.75|walk
+27-36|AP-36:118.72;R-4:51.01;AP-6:9.10;AP-61:25.59|walk
+27-38|R-3:14.75;(sin nombre):1.10;R-2:43.26|walk
+27-43|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+27-44|R-3:14.75|walk
+27-45|AP-36:118.72;R-4:51.01;AP-6:57.46|walk
+28-29|AP-66:76.66;(sin nombre):0.19;A-66*:0.43|walk
+28-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+28-32|AP-9:14.74|walk
+28-34|(sin nombre):1.01;AP-1:80.95|walk
+28-39|(sin nombre):1.79;AP-68:222.10|walk
+28-40|AP-6:56.41;R-2:57.09|walk
+28-41|AP-6:56.41|walk
+28-42|AP-6:56.41|walk
+28-46|(sin nombre):1.79;AP-68:222.10|walk
+29-30|A-66*:0.37;AP-66:76.66;(sin nombre):0.19|walk
+29-31|AP-8:17.73;AP-68:33.09;(sin nombre):2.52;N-622:0.37;AP-15:11.63;PA-34*:0.01|walk
+29-32|AP-9M:2.42;AP-9:103.05|walk
+29-33|A-66*:0.37;AP-66:76.66;(sin nombre):0.19|walk
+29-34|AP-8:32.26;E 70*:2.41;AP-1:41.84|walk
+29-36|A-66*:0.37;AP-66:76.66;(sin nombre):0.19|walk
+29-37|A-66*:0.37;AP-66:76.66;(sin nombre):0.19|walk
+29-38|A-66*:0.37;AP-66:76.66;(sin nombre):0.19|walk
+29-39|A-66*:0.37;AP-66:76.66;(sin nombre):1.98;AP-68:222.10|walk
+29-40|A-66*:0.37;AP-66:76.66;(sin nombre):1.98;AP-68:222.10|walk
+29-41|A-66*:0.37;AP-66:76.66;(sin nombre):0.19;AP-6:56.41|walk
+29-42|A-66*:0.37;AP-66:76.66;(sin nombre):0.19;AP-6:56.41|walk
+29-43|A-66*:0.37;AP-66:76.66;(sin nombre):0.19|walk
+29-44|A-66*:0.37;AP-66:76.66;(sin nombre):0.19|walk
+29-45|A-66*:0.37;AP-66:76.66;(sin nombre):0.19|walk
+29-46|A-66*:0.37;AP-66:76.66;(sin nombre):1.98;AP-68:222.10|walk
+30-31|AP-15:11.63;(sin nombre):1.29;PA-34*:0.01|walk
+30-32|AP-9:14.74|walk
+30-34|(sin nombre):1.01;AP-1:80.95|walk
+30-39|(sin nombre):1.79;AP-68:222.10|walk
+30-40|(sin nombre):1.79;AP-68:222.10|walk
+30-41|AP-6:56.41|walk
+30-42|AP-6:56.41|walk
+30-46|(sin nombre):1.79;AP-68:222.10|walk
+31-32|(sin nombre):1.29;AP-15:11.26;AP-9:14.74|walk
+31-33|(sin nombre):1.29;AP-15:11.26|walk
+31-34|(sin nombre):1.29;AP-15:11.26|walk
+31-35|(sin nombre):2.23;AP-15:11.26;N-622:0.72;AP-68:33.59;AP-8:14.25|walk
+31-36|(sin nombre):1.29;AP-15:11.26|walk
+31-37|(sin nombre):1.29;AP-15:11.26|walk
+31-38|AP-15:62.47|walk
+31-39|AP-15:69.52;AP-68:82.67|walk
+31-40|AP-15:69.52;AP-68:82.67|walk
+31-41|(sin nombre):1.29;AP-15:11.26|walk
+31-42|AP-15:69.52;AP-68:82.67|walk
+31-43|(sin nombre):1.29;AP-15:11.26|walk
+31-44|(sin nombre):1.29;AP-15:11.26|walk
+31-45|(sin nombre):1.29;AP-15:11.26|walk
+31-46|AP-15:69.52;AP-68:82.67|walk
+32-33|AP-9:13.83|walk
+32-34|AP-9:13.83;(sin nombre):1.01;AP-1:80.95|walk
+32-35|(sin nombre):0.60;AP-9:102.21;AP-9 M:0.48;AP-9M:1.26|walk
+32-36|AP-9:13.83|walk
+32-37|AP-9:13.83|walk
+32-38|AP-9:13.83|walk
+32-39|AP-9:21.94;AP-68:224.78|maniobras
+32-40|AP-9:13.83;AP-6:56.41;R-2:57.09|walk
+32-41|AP-9:13.83;AP-6:56.41|walk
+32-42|AP-9:13.83;AP-6:56.41|walk
+32-43|AP-9:13.83|walk
+32-44|AP-9:13.83|walk
+32-45|AP-9:13.83|walk
+32-46|AP-9:13.83;(sin nombre):1.79;AP-68:222.10|walk
+33-34|(sin nombre):1.01;AP-1:80.95|walk
+33-36|AP-51:22.46;(sin nombre):0.63|walk
+33-39|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+33-40|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+33-41|AP-51:23.46;AP-6:27.57|walk
+33-42|AP-51:23.46;AP-6:27.57|walk
+33-46|AP-51:23.46;AP-6:27.57;R-2:57.09|walk
+34-35|GI-20*:2.59;DO*:6.92;AP-1:34.34;AP-8:31.49;E 70*:2.48|walk
+34-36|GI-20*:2.59;DO*:6.92;AP-1:73.76;(sin nombre):0.62|walk
+34-37|GI-20*:2.59;DO*:6.92;AP-1:73.76;(sin nombre):0.62|walk
+34-38|AP-15:75.28|walk
+34-39|AP-15:82.33;AP-68:82.67|walk
+34-40|AP-15:82.33;AP-68:82.67|walk
+34-41|GI-20*:2.59;DO*:6.92;AP-1:73.76;(sin nombre):0.62|walk
+34-42|AP-15:82.33;AP-68:82.67|walk
+34-43|GI-20*:2.59;DO*:6.92;AP-1:73.76;(sin nombre):0.62|walk
+34-44|GI-20*:2.59;DO*:6.92;AP-1:79.17;E 05*:0.12|walk
+34-45|GI-20*:2.59;DO*:6.92;AP-1:73.76;(sin nombre):0.62|walk
+34-46|AP-15:82.33;AP-68:82.67|walk
+35-38|AP-8:17.73;AP-68:124.44;(sin nombre):1.01|walk
+35-39|AP-8:17.73;AP-68:288.59|walk
+35-40|AP-8:17.73;AP-68:288.59|walk
+35-41|AP-6:56.41|walk
+35-42|AP-8:17.73;AP-68:288.59|walk
+35-44|AP-8:17.73;AP-68:33.09;(sin nombre):1.23;N-622:0.37|walk
+35-46|AP-8:17.73;AP-68:288.59|walk
+36-37|AP-61:25.87;AP-6:8.35|walk
+36-39|AP-61:25.87;AP-6:8.35;R-2:57.09|walk
+36-40|AP-61:25.87;AP-6:8.35;R-2:57.09|walk
+36-41|AP-61:25.87;AP-6:8.35|walk
+36-42|AP-61:25.87;AP-6:8.35|walk
+36-46|AP-61:25.87;AP-6:8.35;R-2:57.09|walk
+37-38|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+37-46|R-5:20.28;(sin nombre):1.10;R-2:43.26|walk
+38-41|R-2:42.47;(sin nombre):0.26|walk
+38-44|(sin nombre):1.38;AP-68:54.17|walk
+39-41|R-2:42.47;(sin nombre):0.26|walk
+39-43|AP-68:203.23;(sin nombre):0.52|walk
+39-44|AP-68:218.06;(sin nombre):0.72|walk
+39-45|AP-68:203.23;(sin nombre):0.52|walk
+40-41|R-4:4.75;(sin nombre):0.95|walk
+40-44|AP-68:218.06;(sin nombre):0.72|walk
+40-45|R-2:55.71;AP-6:57.46|walk
+41-43|AP-6:57.46|walk
+41-45|AP-6:57.46|walk
+41-46|(sin nombre):1.10;R-2:43.26|walk
+42-43|AP-6:57.46|walk
+42-44|AP-68:218.06;(sin nombre):0.72|walk
+42-45|AP-6:57.46|walk
+43-46|(sin nombre):1.79;AP-68:222.10|walk
+44-46|(sin nombre):1.29;AP-68:222.10|walk
+45-46|(sin nombre):1.79;AP-68:222.10|walk

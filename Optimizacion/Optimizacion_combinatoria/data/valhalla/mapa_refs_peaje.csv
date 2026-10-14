@@ -1,0 +1,49 @@
+# Correspondencia entre el nombre de la vía de peaje en OpenStreetMap (arista con toll=yes,
+# obtenido con Valhalla trace_attributes) y el grupo tarifario de peajes_2026.csv.
+# LIBRE = la arista está marcada como peaje en OSM pero el operador no cobra a ligeros (ver nota).
+# DOMINANTE = arista sin nombre: se asigna al grupo con más km de peaje en esa misma ruta.
+# PORTUGAL = la ruta más rápida cruza Portugal (Badajoz/Huelva-Pontevedra); no se modelan peajes portugueses:
+#            para ese par solo se ofrece la ruta sin peajes por España.
+# Un asterisco (*) indica que el nombre completo de la arista en OSM era más largo (se recorta en el primer "/").
+ref_osm,grupo,nota
+AP-6,AP-6,
+AP-51,AP-51,
+AP-61,AP-61,
+AP-9,AP-9,
+AP-9M,AP-9,Ramal de la AP-9 (misma concesión Audasa)
+AP-9 M,AP-9,Variante de escritura de AP-9M en OSM
+AP-53,AP-53,
+AP-66,AP-66,
+A-66*,AP-66,Arista con nombre de la autovía pero dentro de la AP-66
+AP-71,AP-71,
+AP-68,AP-68,
+AP-15,AP-15,
+AP-8,AP-8/AP-1,Red de Bidegi (Gipuzkoa) e Interbiak (Bizkaia)
+AP-1,AP-8/AP-1,AP-1 Eibar-Vitoria (Bidegi); la AP-1 Burgos-Armiñón es libre desde 2018 y OSM no la marca
+DO*,AP-8/AP-1,Tramo AP-8/AP-1 en Donostia sin ref AP en la arista
+E 70*,AP-8/AP-1,Tramo AP-8 sin ref AP en la arista
+E 05*,AP-8/AP-1,Tramo AP-1 sin ref AP en la arista
+BI-626,ARTXANDA,Túneles de Artxanda (cuota fija)
+R-2,R-2,
+R-3,R-3,
+R-4,R-4,
+R-5,R-5,
+M-12,M-12,
+AP-36,AP-36,
+AP-41,AP-41,
+AP-7,AP-7,Solo quedan de peaje los tramos del sur; ver peajes_2026.csv
+AP-46,AP-46,
+C-32,C-32,
+C-16,C-16,
+GI-20*,LIBRE,OSM la marca de peaje pero no figura en las tarifas de Bidegi (AP-1/AP-8/AP-636)
+N-622,LIBRE,Carretera nacional sin peaje (arista contigua a un peaje)
+PA-34*,LIBRE,Acceso urbano sin peaje
+(sin nombre),DOMINANTE,Ramales y playas de peaje sin nombre
+A 1*,PORTUGAL,Autoestrada do Norte (Portugal)
+A 2*,PORTUGAL,Autoestrada do Sul (Portugal)
+A 3*,PORTUGAL,Autoestrada (Portugal)
+A 6*,PORTUGAL,Autoestrada do Alentejo Central (Portugal)
+A 10*,PORTUGAL,Autoestrada (Portugal)
+A 13,PORTUGAL,Autoestrada (Portugal)
+A 13*,PORTUGAL,Autoestrada (Portugal)
+E 01,PORTUGAL,Tramo sin ref nacional en Portugal
