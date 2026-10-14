@@ -92,9 +92,7 @@ la ejecución no necesita Internet. El detalle técnico de cada archivo de `data
 ## Silueta de España
 
 - Polígonos de provincias: `data/valhalla/spain-provinces.geojson`, del repositorio click_that_hood
-  de Code for America (GitHub), consultado el 2026-10-13. Pendiente: filtrar las provincias
-  insulares y guardarlo como `data/spain_peninsular.geojson`, que es el archivo que usa `main.py`
-  para dibujar el mapa.
+  de Code for America (GitHub), consultado el 2026-10-13. data/spain_peninsular.geojson se genera con python preparar_mapa.py, que quita Illes Balears, Las Palmas, Santa Cruz de Tenerife, Ceuta y Melilla (quedan las 47 provincias peninsulares).
 
 ## Datos sintéticos de demostración
 

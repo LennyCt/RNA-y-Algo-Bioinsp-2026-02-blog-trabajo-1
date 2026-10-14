@@ -117,6 +117,7 @@ config/experiment.json   semilla, corridas, vehículo, hiperparámetros
 sources.md               fuentes y fechas de todos los datos
 data/                    matrices usadas por main.py; valhalla/ (originales), osrm/ (comparación), demo/
 tests/                   35 pruebas (unittest)
+preparar_mapa.py         data/valhalla/spain-provinces.geojson -> data/spain_peninsular.geojson
 results/                 salidas
 ```
 
