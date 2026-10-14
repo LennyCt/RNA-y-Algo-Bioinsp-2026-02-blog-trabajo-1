@@ -249,7 +249,7 @@ Las matrices de distancia y tiempo se obtienen una sola vez de la API Table de O
 | Distancias y tiempos | OSRM, API Table, perfil `driving` | Ubicado en data/distances.csv |
 | Peajes (2162 pares dirigidos) | Tarifas oficiales de cada concesionaria, clase 1 | **Pendiente:**  |
 | Vehículo y consumo | Ficha técnica del fabricante u homologación | Completo, vehiculo elegido Dacian Sanndero |
-| Precio del combustible | Fuente oficial con fecha | Fuente en experimet.json |
+| Precio del combustible | Fuente oficial con fecha | Fuente en experiment.json |
 
 **Método para los peajes: decisión pendiente del equipo.** Identificar los tramos de peaje de cada itinerario y sumar las tarifas oficiales exige decidir cuánto del trabajo se hace a mano y cuánto se aproxima. Se exploró detectar los tramos automáticamente con OSRM y OpenStreetMap, pero esa vía se descartó y su código se retiró del repositorio (ver la cacería de la alucinación). Cualquier método que se adopte debe declarar si el importe es oficial o una estimación.
 
